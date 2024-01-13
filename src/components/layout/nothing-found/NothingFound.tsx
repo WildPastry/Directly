@@ -15,9 +15,9 @@ export function NothingFound() {
             size='lg'
             ta='center'
             className={classes.description}>
-            Page you are trying to open does not exist. You may have mistyped
-            the address, or the page has been moved to another URL. If you think
-            this is an error contact support.
+            The page you are trying to open does not exist. You may have
+            mistyped the address, or the page has been moved to another URL. If
+            you think this is an error contact support.
           </Text>
           <Group justify='center'>
             <Link to={`/`}>
