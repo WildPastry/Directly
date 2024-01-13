@@ -1,14 +1,20 @@
 import { Button, Group, useMantineColorScheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import directlyLogo from '/logo.svg';
 
 const Header: React.FC = (): JSX.Element => {
   // Colour scheme
   const { setColorScheme } = useMantineColorScheme();
 
   return (
-    <header aria-label='Header Section'>
+    <header aria-label='Header Section' className='mb-4'>
       <div className='mx-auto flex max-w-4xl justify-between h-16 items-center'>
-        <Link to={`/`}>DIRECTLY</Link>
+        <Link to={`/`}>
+          <div className='flex justify-between items-center'>
+            <img alt='Directly logo' className='w-8 mr-2' src={directlyLogo} />
+            <h1 className='font-thin text-2xl tracking-widest'>Directly</h1>
+          </div>
+        </Link>
         <Group gap='xs'>
           <Link to={`/`}>
             <Button size='xs' variant='outline'>
