@@ -1,5 +1,10 @@
+// Style imports
 import './index.css';
-import '@mantine/core/styles.css';
+import '@mantine/core/styles/global.css';
+import '@mantine/core/styles/Group.css';
+import '@mantine/core/styles/UnstyledButton.css';
+import '@mantine/core/styles/Button.css';
+// Functional imports
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import AppTheme from './constants/AppTheme.tsx';
 import { MantineProvider } from '@mantine/core';

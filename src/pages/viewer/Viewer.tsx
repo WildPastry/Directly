@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
 import { useEffect, useRef } from 'react';
-import { Button } from '@mantine/core';
-import { Link } from 'react-router-dom';
 import WebViewer from '@pdftron/webviewer';
 
 const Viewer: React.FC = (): JSX.Element => {
@@ -23,14 +21,7 @@ const Viewer: React.FC = (): JSX.Element => {
 
   return (
     <section aria-label='Viewer Section'>
-      <div>
-        <h1>VIEWER</h1>
-        <Link to={`/books`}>
-          <Button color='cyan' size='xs' variant='filled'>
-            Back
-          </Button>
-        </Link>
-      </div>
+      <h1 className='text-6xl'>VIEWER</h1>
       <div ref={webViewerRef} />
     </section>
   );
