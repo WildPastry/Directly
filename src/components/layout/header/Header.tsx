@@ -1,4 +1,11 @@
 import { Button, Group, useMantineColorScheme } from '@mantine/core';
+import {
+  IconBook,
+  IconEye,
+  IconHome,
+  IconMoonFilled,
+  IconSunFilled
+} from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
 import directlyLogo from '/logo.svg';
 
@@ -17,29 +24,40 @@ const Header: React.FC = (): JSX.Element => {
         </Link>
         <Group gap='xs'>
           <Link to={`/`}>
-            <Button size='xs' variant='outline'>
+            <Button
+              leftSection={<IconHome size={14} />}
+              size='xs'
+              variant='outline'>
               Home
             </Button>
           </Link>
           <Link to={`/books`}>
-            <Button size='xs' variant='outline'>
+            <Button
+              leftSection={<IconBook size={14} />}
+              size='xs'
+              variant='outline'>
               Books
             </Button>
           </Link>
           <Link to={`/viewer`}>
-            <Button size='xs' variant='outline'>
+            <Button
+              leftSection={<IconEye size={14} />}
+              size='xs'
+              variant='outline'>
               Viewer
             </Button>
           </Link>
         </Group>
         <Group gap='xs'>
           <Button
+            leftSection={<IconSunFilled size={14} />}
             onClick={() => setColorScheme('light')}
             size='xs'
             variant='filled'>
             Light
           </Button>
           <Button
+            leftSection={<IconMoonFilled size={14} />}
             onClick={() => setColorScheme('dark')}
             size='xs'
             variant='filled'>

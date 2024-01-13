@@ -53,7 +53,7 @@ const App: React.FC = (): JSX.Element => {
         ) : (
           <>
             <Header />
-            <div className='p-3 h-full w-full'>
+            <div className='p-4 h-full w-full'>
               <Outlet />
             </div>
           </>
