@@ -1,7 +1,7 @@
 const Books: React.FC = (): JSX.Element => {
   return (
     <section aria-label='Books Section'>
-      <h1 className='text-6xl'>BOOKS</h1>
+      <h1 className='text-6xl mb-3'>BOOKS</h1>
     </section>
   );
 };

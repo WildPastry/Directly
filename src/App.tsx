@@ -43,7 +43,7 @@ const App: React.FC = (): JSX.Element => {
   // Render the page
   const renderPage = (): JSX.Element => {
     return (
-      <main aria-label='App Section'>
+      <main aria-label='App Section' className='h-full w-full'>
         {loader ? (
           <section
             className={transitionLoader}
@@ -53,7 +53,9 @@ const App: React.FC = (): JSX.Element => {
         ) : (
           <>
             <Header />
-            <Outlet />
+            <div className='p-3 h-full w-full'>
+              <Outlet />
+            </div>
           </>
         )}
       </main>
