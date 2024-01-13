@@ -28,6 +28,10 @@ const routesConfig: {
       {
         path: '/viewer',
         element: <Viewer />
+      },
+      {
+        path: '*',
+        element: <NotFound />
       }
     ]
   }
