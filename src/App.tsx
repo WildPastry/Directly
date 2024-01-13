@@ -6,6 +6,7 @@ import Loading from './components/features/loading/Loading';
 import NotFound from './pages/not-found/NotFound';
 import { Outlet } from 'react-router-dom';
 import { setLoading } from './redux/slices/loadingSlice';
+import styles from './App.module.css';
 import { useAppDispatch } from './redux/hooks';
 import { useSelector } from 'react-redux';
 
@@ -34,12 +35,19 @@ const App: React.FC = (): JSX.Element => {
     pageLoading(false);
   }, [pageLoading]);
 
+  // Loading logic
+  const transitionLoader = pageData.isLoading
+    ? styles.showLoading
+    : styles.hideLoading;
+
   // Render the page
   const renderPage = (): JSX.Element => {
     return (
       <main aria-label='App Section'>
         {loader ? (
-          <section>
+          <section
+            className={transitionLoader}
+            onTransitionEnd={() => setLoader(false)}>
             <Loading />
           </section>
         ) : (
