@@ -1,16 +1,11 @@
-import { Button } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { NothingFound } from '../../components/layout/nothing-found/NothingFound';
 
 const NotFound: React.FC = (): JSX.Element => {
   return (
-    <section aria-label='Error Section'>
-      <h1 className='text-6xl mb-3'>404</h1>
-      <p>The page you have requested has not been found.</p>
-      <Link to={`/`}>
-        <Button size='xs' variant='filled'>
-          Back
-        </Button>
-      </Link>
+    <section
+      aria-label='Error Section'
+      className='flex justify-center items-center h-full w-full p-4'>
+      <NothingFound />
     </section>
   );
 };

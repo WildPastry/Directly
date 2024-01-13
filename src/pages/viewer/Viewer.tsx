@@ -21,7 +21,7 @@ const Viewer: React.FC = (): JSX.Element => {
 
   return (
     <section aria-label='Viewer Section' className='h-full w-full'>
-      <h1 className='text-6xl mb-3'>VIEWER</h1>
+      <h1 className='text-4xl mb-3'>Viewer</h1>
       <div className='h-full w-full mb-3' ref={webViewerRef} />
     </section>
   );
