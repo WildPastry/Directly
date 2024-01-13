@@ -15,7 +15,9 @@ const Header: React.FC = (): JSX.Element => {
 
   return (
     <header aria-label='Header Section' className='mb-4'>
-      <div className='mx-auto flex max-w-4xl justify-between h-16 items-center'>
+      <div
+        className='mx-auto flex max-w-4xl 
+      justify-between h-16 items-center px-4'>
         <Link to={`/`}>
           <div className='flex justify-between items-center'>
             <img alt='Directly logo' className='w-8 mr-2' src={directlyLogo} />
