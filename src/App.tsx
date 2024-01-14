@@ -1,12 +1,12 @@
+/* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { AppState } from './redux/store';
-import Header from './components/layout/header/Header';
+import { IAuth } from './models/auth.model';
 import { ILoading } from './models/data.model';
-import Loading from './components/features/loading/Loading';
-import NotFound from './pages/error-page/ErrorPage';
-import { Outlet } from 'react-router-dom';
+import PrivateRoutes from './routes/privateRoutes';
+import PublicRoutes from './routes/publicRoutes';
 import { setLoading } from './redux/slices/loadingSlice';
-import styles from './App.module.css';
 import { useAppDispatch } from './redux/hooks';
 import { useSelector } from 'react-redux';
 
@@ -18,6 +18,10 @@ const App: React.FC = (): JSX.Element => {
   // UseSelector for reading page loading state
   const pageData = useSelector((state: AppState): ILoading => {
     return state.loading;
+  });
+
+  const authState = useSelector((state: AppState): IAuth => {
+    return state.auth;
   });
 
   // Callback / dispatch and effect for setting page loading state
@@ -32,37 +36,23 @@ const App: React.FC = (): JSX.Element => {
   );
 
   useEffect((): void => {
+    console.log(pageData, loader, authState);
     pageLoading(false);
   }, [pageLoading]);
 
-  // Loading logic
-  const transitionLoader = pageData.isLoading
-    ? styles.showLoading
-    : styles.hideLoading;
+  // Auth state for public or private routes
+  function checkAuth() {
+    console.log(authState);
+    return authState;
+  }
 
-  // Render the page
-  const renderPage = (): JSX.Element => {
-    return (
-      <main aria-label='App Section' className='h-full w-full'>
-        {loader ? (
-          <section
-            className={transitionLoader}
-            onTransitionEnd={() => setLoader(false)}>
-            <Loading />
-          </section>
-        ) : (
-          <>
-            <Header />
-            <div className='p-4 h-full w-full'>
-              <Outlet />
-            </div>
-          </>
-        )}
-      </main>
-    );
-  };
-  // Error logic
-  return pageData.isError ? <NotFound /> : renderPage();
+  // Combine and conditionally include routes based on authentication status
+  const router = createBrowserRouter([
+    checkAuth() ? PrivateRoutes() : {},
+    ...PublicRoutes()
+  ]);
+  // Provide the router configuration using RouterProvider
+  return <RouterProvider router={router} />;
 };
 
 // EXPORT App
