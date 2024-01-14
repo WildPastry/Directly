@@ -17,6 +17,7 @@
   "dependencies": {
     "@mantine/core": "^7.4.1",
     "@mantine/dropzone": "^7.4.1",
+    "@mantine/form": "^7.4.1",
     "@mantine/hooks": "^7.4.1",
     "@pdftron/webviewer": "^10.6.0",
     "@reduxjs/toolkit": "^2.0.1",

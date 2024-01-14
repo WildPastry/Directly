@@ -26,7 +26,7 @@ const App: React.FC = (): JSX.Element => {
       setTimeout(() => {
         dispatch(setLoading(loading));
         setLoader(false);
-      }, 1000);
+      }, 5000);
     },
     [dispatch]
   );
