@@ -7,7 +7,7 @@ import {
   IconSunFilled
 } from '@tabler/icons-react';
 import { Link } from 'react-router-dom';
-import directlyLogo from '/logo.svg';
+import directlyLogo from '../../../assets/logo.svg';
 
 const Header: React.FC = (): JSX.Element => {
   // Colour scheme

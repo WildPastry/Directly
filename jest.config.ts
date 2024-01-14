@@ -5,6 +5,7 @@ const config: JestConfigWithTsJest = {
   testEnvironment: 'jsdom',
   transform: {
     '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
+    '^.+\\.svg$': '<rootDir>/svgTransform.cjs',
     '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }]
   }
 };
