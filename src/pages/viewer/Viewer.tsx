@@ -3,8 +3,9 @@ import { useEffect, useRef } from 'react';
 import WebViewer from '@pdftron/webviewer';
 
 const Viewer: React.FC = (): JSX.Element => {
-  const licenseKey = import.meta.env.ASPYRE_KEY;
-  const webViewerRef = useRef<HTMLDivElement>(null);
+  const licenseKey: string = import.meta.env.ASPYRE_KEY;
+  const webViewerRef: React.RefObject<HTMLDivElement> =
+    useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     WebViewer(

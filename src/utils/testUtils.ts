@@ -1,7 +1,7 @@
 // Test utilities
 
 // Mock implementation with matchMedia
-export const mockMatchMedia = () => {
+export const mockMatchMedia: () => void = () => {
   beforeAll(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,

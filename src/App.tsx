@@ -3,7 +3,7 @@ import { AppState } from './redux/store';
 import Header from './components/layout/header/Header';
 import { ILoading } from './models/data.model';
 import Loading from './components/features/loading/Loading';
-import NotFound from './pages/not-found/NotFound';
+import NotFound from './pages/error-page/ErrorPage';
 import { Outlet } from 'react-router-dom';
 import { setLoading } from './redux/slices/loadingSlice';
 import styles from './App.module.css';

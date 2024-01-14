@@ -1,6 +1,6 @@
+import ErrorPage from './ErrorPage';
 import { MantineProvider } from '@mantine/core';
 import { MemoryRouter } from 'react-router-dom';
-import NotFound from './NotFound';
 import { mockMatchMedia } from '../../utils/testUtils';
 import { render } from '@testing-library/react';
 
@@ -12,14 +12,14 @@ const renderWithRouter = (component: any, { route = '/' } = {}) => {
   );
 };
 
-describe('<NotFound />', () => {
+describe('<ErrorPage />', () => {
   // Run global pre-condition
   mockMatchMedia();
 
   it('renders the component', () => {
     renderWithRouter(
       <MantineProvider>
-        <NotFound />
+        <ErrorPage />
       </MantineProvider>,
       { route: '/' }
     );

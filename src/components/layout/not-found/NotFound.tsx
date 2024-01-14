@@ -1,11 +1,11 @@
 import { Button, Container, Group, Text, Title } from '@mantine/core';
 import { Illustration } from './Illustration';
 import { Link } from 'react-router-dom';
-import classes from './NothingFound.module.css';
+import classes from './NotFound.module.css';
 
-export function NothingFound() {
+const NotFound: React.FC = (): JSX.Element => {
   return (
-    <Container className='w-full'>
+    <Container className='w-full p-4'>
       <div className={classes.inner}>
         <Illustration className={classes.image} />
         <div className={classes.content}>
@@ -21,11 +21,15 @@ export function NothingFound() {
           </Text>
           <Group justify='center'>
             <Link to={`/`}>
-              <Button size='md'>Take me back to home page</Button>
+              <Button size='md'>Take me back to the home page</Button>
             </Link>
           </Group>
         </div>
       </div>
     </Container>
   );
-}
+};
+
+// EXPORT NotFound
+NotFound.displayName = 'DIRECTLY | NotFound';
+export default NotFound;
