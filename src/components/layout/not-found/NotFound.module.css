@@ -14,7 +14,8 @@
   padding-top: rem(220px);
   position: relative;
   z-index: 1;
-
+  
+  /* mantine-breakpoint-sm */
   @media (max-width: 48em) {
     padding-top: rem(120px);
   }
@@ -28,6 +29,7 @@
   font-weight: 900;
   font-size: rem(38px);
 
+  /* mantine-breakpoint-sm */
   @media (max-width: 48em) {
     font-size: rem(32px);
   }

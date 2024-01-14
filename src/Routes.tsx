@@ -1,7 +1,7 @@
 import App from './App.tsx';
 import Books from './pages/books/Books.tsx';
 import Home from './pages/home/Home.tsx';
-import NotFound from './pages/not-found/NotFound.tsx';
+import NotFound from './pages/error-page/ErrorPage.tsx';
 import Viewer from './pages/viewer/Viewer.tsx';
 
 const routesConfig: {

@@ -1,9 +1,9 @@
 import { Button, Container, Group, Text, Title } from '@mantine/core';
 import { Illustration } from './Illustration';
 import { Link } from 'react-router-dom';
-import classes from './NothingFound.module.css';
+import classes from './NotFound.module.css';
 
-export function NothingFound(): JSX.Element {
+const NotFound: React.FC = (): JSX.Element => {
   return (
     <Container className='w-full p-4'>
       <div className={classes.inner}>
@@ -28,4 +28,8 @@ export function NothingFound(): JSX.Element {
       </div>
     </Container>
   );
-}
+};
+
+// EXPORT NotFound
+NotFound.displayName = 'DIRECTLY | NotFound';
+export default NotFound;
