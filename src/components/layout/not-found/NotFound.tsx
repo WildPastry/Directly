@@ -20,7 +20,7 @@ const NotFound: React.FC = (): JSX.Element => {
             you think this is an error contact support.
           </Text>
           <Group justify='center'>
-            <Link to={`/`}>
+            <Link to={`/home`}>
               <Button size='md'>Take me back to the home page</Button>
             </Link>
           </Group>

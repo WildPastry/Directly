@@ -1,38 +1,32 @@
-import App from '../App.tsx';
-import Books from '../pages/books/Books.tsx';
-import Home from '../pages/home/Home.tsx';
+import AuthGuard from './AuthGuard.tsx';
 import NotFound from '../pages/error-page/ErrorPage.tsx';
-import Viewer from '../pages/viewer/Viewer.tsx';
+import PrivateRoutes from './PrivateRoutes.tsx';
+import PublicRoutes from './PublicRoutes.tsx';
 
-const routesConfig: {
-  element: JSX.Element;
-  errorElement: JSX.Element;
-  children: {
-    path: string;
-    element: JSX.Element;
-  }[];
-}[] = [
+const routesConfig: (
+  | {
+      path: string;
+      element: JSX.Element;
+    }
+  | {
+      element: JSX.Element;
+      errorElement: JSX.Element;
+      children: {
+        path: string;
+        element: JSX.Element;
+      }[];
+    }
+)[] = [
   {
-    element: <App />,
+    path: '/',
+    element: <AuthGuard />,
     errorElement: <NotFound />,
-    children: [
-      {
-        path: '/',
-        element: <Home />
-      },
-      {
-        path: '/books',
-        element: <Books />
-      },
-      {
-        path: '/viewer',
-        element: <Viewer />
-      },
-      {
-        path: '*',
-        element: <NotFound />
-      }
-    ]
+    children: PrivateRoutes()
+  },
+  PublicRoutes(),
+  {
+    path: '*',
+    element: <NotFound />
   }
 ];
 

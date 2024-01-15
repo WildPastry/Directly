@@ -23,6 +23,7 @@ export function AuthForm(props: PaperProps) {
   // Set up navigation and dispatch
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   // Set up form logic
   const [type, toggle] = useToggle(['login', 'register']);
   const form = useForm({
@@ -41,7 +42,7 @@ export function AuthForm(props: PaperProps) {
   });
 
   return (
-    <Paper radius='md' p='xl' withBorder {...props}>
+    <Paper radius='md' p='xl' withBorder {...props} className='w-96'>
       <Text size='lg' fw={500}>
         Welcome to Directly, {type} with
       </Text>
@@ -54,13 +55,16 @@ export function AuthForm(props: PaperProps) {
 
       <form
         onSubmit={form.onSubmit(() => {
-          console.log('SUBMIT...');
+          console.log('Sign in...');
           dispatch(setAuth(true));
-          navigate('/');
+          navigate('/home');
         })}>
         <Stack>
           {type === 'register' && (
             <TextInput
+              classNames={{
+                label: 'mb-1'
+              }}
               label='Name'
               placeholder='Your name'
               value={form.values.name}
@@ -72,9 +76,12 @@ export function AuthForm(props: PaperProps) {
           )}
 
           <TextInput
+            classNames={{
+              label: 'mb-1'
+            }}
             required
             label='Email'
-            placeholder='hello@directly.dev'
+            placeholder='hello@directly.co.nz'
             value={form.values.email}
             onChange={(event) =>
               form.setFieldValue('email', event.currentTarget.value)
@@ -84,6 +91,9 @@ export function AuthForm(props: PaperProps) {
           />
 
           <PasswordInput
+            classNames={{
+              label: 'mb-1'
+            }}
             required
             label='Password'
             placeholder='Your password'
@@ -120,7 +130,7 @@ export function AuthForm(props: PaperProps) {
               ? 'Already have an account? Login'
               : "Don't have an account? Register"}
           </Anchor>
-          <Button type='submit' radius='xl'>
+          <Button type='submit' size='xs' variant='filled'>
             {upperFirst(type)}
           </Button>
         </Group>

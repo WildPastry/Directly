@@ -2,10 +2,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { AppState } from './redux/store';
-import { IAuth } from './models/auth.model';
 import { ILoading } from './models/data.model';
-import PrivateRoutes from './routes/privateRoutes';
-import PublicRoutes from './routes/publicRoutes';
+import routesConfig from './routes/Routes';
 import { setLoading } from './redux/slices/loadingSlice';
 import { useAppDispatch } from './redux/hooks';
 import { useSelector } from 'react-redux';
@@ -14,14 +12,11 @@ import { useSelector } from 'react-redux';
 const App: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [loader, setLoader] = useState(true);
+  const router = createBrowserRouter(routesConfig);
 
   // UseSelector for reading page loading state
   const pageData = useSelector((state: AppState): ILoading => {
     return state.loading;
-  });
-
-  const authState = useSelector((state: AppState): IAuth => {
-    return state.auth;
   });
 
   // Callback / dispatch and effect for setting page loading state
@@ -36,21 +31,10 @@ const App: React.FC = (): JSX.Element => {
   );
 
   useEffect((): void => {
-    console.log(pageData, loader, authState);
+    console.log(pageData, loader);
     pageLoading(false);
   }, [pageLoading]);
 
-  // Auth state for public or private routes
-  function checkAuth() {
-    console.log(authState);
-    return authState;
-  }
-
-  // Combine and conditionally include routes based on authentication status
-  const router = createBrowserRouter([
-    checkAuth() ? PrivateRoutes() : {},
-    ...PublicRoutes()
-  ]);
   // Provide the router configuration using RouterProvider
   return <RouterProvider router={router} />;
 };
