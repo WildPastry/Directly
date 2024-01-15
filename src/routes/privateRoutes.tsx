@@ -1,3 +1,4 @@
+import NotFound from '../components/layout/not-found/NotFound.tsx';
 import { lazy } from 'react';
 
 export default function PrivateRoutes(): {
@@ -17,6 +18,7 @@ export default function PrivateRoutes(): {
   return [
     { path: '/home', element: <Home /> },
     { path: '/books', element: <Books /> },
-    { path: '/viewer', element: <Viewer /> }
+    { path: '/viewer', element: <Viewer /> },
+    { path: '*', element: <NotFound /> }
   ];
 }

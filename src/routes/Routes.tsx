@@ -23,11 +23,7 @@ const routesConfig: (
     errorElement: <NotFound />,
     children: PrivateRoutes()
   },
-  PublicRoutes(),
-  {
-    path: '*',
-    element: <NotFound />
-  }
+  PublicRoutes()
 ];
 
 export default routesConfig;
