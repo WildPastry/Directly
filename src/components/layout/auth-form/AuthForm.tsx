@@ -14,13 +14,16 @@ import {
 } from '@mantine/core';
 import { upperFirst, useToggle } from '@mantine/hooks';
 import { GoogleButton } from './GoogleButton';
-import { Link } from 'react-router-dom';
 import { setAuth } from '../../../redux/slices/authSlice';
 import { useAppDispatch } from '../../../redux/hooks';
 import { useForm } from '@mantine/form';
+import { useNavigate } from 'react-router-dom';
 
 export function AuthForm(props: PaperProps) {
+  // Set up navigation and dispatch
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  // Set up form logic
   const [type, toggle] = useToggle(['login', 'register']);
   const form = useForm({
     initialValues: {
@@ -53,6 +56,7 @@ export function AuthForm(props: PaperProps) {
         onSubmit={form.onSubmit(() => {
           console.log('SUBMIT...');
           dispatch(setAuth(true));
+          navigate('/');
         })}>
         <Stack>
           {type === 'register' && (
@@ -116,11 +120,9 @@ export function AuthForm(props: PaperProps) {
               ? 'Already have an account? Login'
               : "Don't have an account? Register"}
           </Anchor>
-          <Link to='/'>
-            <Button type='submit' radius='xl'>
-              {upperFirst(type)}
-            </Button>
-          </Link>
+          <Button type='submit' radius='xl'>
+            {upperFirst(type)}
+          </Button>
         </Group>
       </form>
     </Paper>
