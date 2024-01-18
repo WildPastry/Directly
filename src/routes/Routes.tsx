@@ -10,7 +10,6 @@ const routesConfig: (
     }
   | {
       element: JSX.Element;
-      errorElement: JSX.Element;
       children: {
         path: string;
         element: JSX.Element;
@@ -20,10 +19,13 @@ const routesConfig: (
   {
     path: '/',
     element: <AuthGuard />,
-    errorElement: <NotFound />,
     children: PrivateRoutes()
   },
-  PublicRoutes()
+  PublicRoutes(),
+  {
+    path: '*',
+    element: <NotFound />
+  }
 ];
 
 export default routesConfig;

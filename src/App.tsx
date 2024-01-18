@@ -20,15 +20,12 @@ const App: React.FC = (): JSX.Element => {
   });
 
   // Callback / dispatch and effect for setting page loading state
-  const pageLoading = useCallback(
-    (loading: boolean): void => {
-      setTimeout(() => {
-        dispatch(setLoading(loading));
-        setLoader(false);
-      }, 1000);
-    },
-    [dispatch]
-  );
+  const pageLoading = useCallback((loading: boolean): void => {
+    setTimeout(() => {
+      dispatch(setLoading(loading));
+      setLoader(false);
+    }, 1000);
+  }, []);
 
   useEffect((): void => {
     console.log(pageData, loader);
