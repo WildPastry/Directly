@@ -1,13 +1,26 @@
 /* eslint-disable no-console */
-import { Dropzone, DropzoneProps } from '@mantine/dropzone';
+import {
+  Dropzone,
+  DropzoneProps,
+  FileRejection,
+  FileWithPath
+} from '@mantine/dropzone';
 import { Group, Text, rem } from '@mantine/core';
 import { IconPhoto, IconUpload, IconX } from '@tabler/icons-react';
 
-export function DropzoneArea(props: Partial<DropzoneProps>): JSX.Element {
+interface DropzoneAreaProps {
+  fileUploaded: (files: FileWithPath[]) => void;
+}
+
+export const DropzoneArea: React.FC<
+  DropzoneAreaProps & Partial<DropzoneProps>
+> = ({ fileUploaded, ...props }) => {
   return (
     <Dropzone
-      onDrop={(files) => console.log('accepted files', files)}
-      onReject={(files) => console.log('rejected files', files)}
+      onDrop={(files: FileWithPath[]) => fileUploaded(files)}
+      onReject={(files: FileRejection[]) =>
+        console.log('rejected files', files)
+      }
       maxSize={5 * 1024 ** 2}
       {...props}>
       <Group
@@ -57,4 +70,4 @@ export function DropzoneArea(props: Partial<DropzoneProps>): JSX.Element {
       </Group>
     </Dropzone>
   );
-}
+};
