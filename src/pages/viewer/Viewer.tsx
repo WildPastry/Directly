@@ -11,8 +11,10 @@ const Viewer: React.FC = (): JSX.Element => {
     WebViewer(
       {
         path: 'lib',
+        fullAPI: true,
         licenseKey: licenseKey,
-        enableFilePicker: true
+        enableFilePicker: true,
+        config: '../../../config.js'
       },
       webViewerRef.current as HTMLDivElement
     ).then((instance) => {
