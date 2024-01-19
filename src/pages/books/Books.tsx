@@ -19,7 +19,7 @@ const Books: React.FC = (): JSX.Element => {
       <DropzoneArea fileUploaded={handleFiles} className='mb-3' />
       {display ? (
         <div className='flex'>
-          {files.map((currentFile: any) => (
+          {files.map((currentFile: FileWithPath) => (
             <div key={currentFile.name}>
               <p>{currentFile.name ? currentFile.name : 'Not available'}</p>
               <p>{currentFile.size ? currentFile.size : 'Not available'}</p>
