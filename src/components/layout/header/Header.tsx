@@ -8,7 +8,7 @@ import {
   IconMoonFilled,
   IconSunFilled
 } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import directlyLogo from '../../../assets/logo.svg';
 import { setAuth } from '../../../redux/slices/authSlice';
 import { useAppDispatch } from '../../../redux/hooks';
@@ -36,31 +36,37 @@ const Header: React.FC = (): JSX.Element => {
           </div>
         </Link>
         <Group gap='xs'>
-          <Link to={`/home`}>
+          <NavLink
+            to={`/home`}
+            className={({ isActive }) => (isActive ? 'bg-gray-900' : '')}>
             <Button
               leftSection={<IconHome size={14} />}
               size='xs'
               variant='outline'>
               Home
             </Button>
-          </Link>
-          <Link to={`/books`}>
+          </NavLink>
+          <NavLink
+            to={`/books`}
+            className={({ isActive }) => (isActive ? 'bg-gray-900' : '')}>
             <Button
               leftSection={<IconBook size={14} />}
               size='xs'
               variant='outline'>
               Books
             </Button>
-          </Link>
-          <Link to={`/viewer`}>
+          </NavLink>
+          <NavLink
+            to={`/viewer`}
+            className={({ isActive }) => (isActive ? 'bg-gray-900' : '')}>
             <Button
               leftSection={<IconEye size={14} />}
               size='xs'
               variant='outline'>
               Viewer
             </Button>
-          </Link>
-          <Link to={`/login`}>
+          </NavLink>
+          <NavLink to={`/login`}>
             <Button
               leftSection={<IconLogout size={14} />}
               color='var(--mantine-color-indigo-9)'
@@ -69,7 +75,7 @@ const Header: React.FC = (): JSX.Element => {
               variant='filled'>
               Logout
             </Button>
-          </Link>
+          </NavLink>
         </Group>
         <Group gap='xs'>
           <Button
