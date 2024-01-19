@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { DropzoneArea } from '../../components/features/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { useState } from 'react';
@@ -15,23 +16,22 @@ const Books: React.FC = (): JSX.Element => {
   return (
     <section aria-label='Books Section'>
       <h1 className='text-4xl mb-3'>Books</h1>
-      <DropzoneArea fileUploaded={handleFiles} />
+      <DropzoneArea fileUploaded={handleFiles} className='mb-3' />
       {display ? (
-        <ul>
-          <li>Name: {files[0].name ? files[0].name : 'Not available'}</li>
-          <li>Size: {files[0].size ? files[0].size : 'Not available'}</li>
-          <li>Type: {files[0].type ? files[0].type : 'Not available'}</li>
-          <li>
-            Mod:{' '}
-            {files[0].lastModified ? files[0].lastModified : 'Not available'}
-          </li>
-          <li>
-            Path:{' '}
-            {files[0].webkitRelativePath
-              ? files[0].webkitRelativePath
-              : 'Not available'}
-          </li>
-        </ul>
+        <div className='flex'>
+          {files.map((currentFile: any) => (
+            <div key={currentFile.name}>
+              <p>{currentFile.name ? currentFile.name : 'Not available'}</p>
+              <p>{currentFile.size ? currentFile.size : 'Not available'}</p>
+              <p>{currentFile.type ? currentFile.type : 'Not available'}</p>
+              <p>
+                {currentFile.lastModified
+                  ? currentFile.lastModified
+                  : 'Not available'}
+              </p>
+            </div>
+          ))}
+        </div>
       ) : null}
     </section>
   );
