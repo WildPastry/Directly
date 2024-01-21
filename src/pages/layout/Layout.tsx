@@ -5,36 +5,37 @@ import {
   Group,
   useMantineColorScheme
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import Loading from '../../components/features/loading/Loading';
-import { Link, NavLink, Outlet } from 'react-router-dom';
-import { Suspense } from 'react';
-import directlyLogo from '../../assets/logo.svg';
 import {
-  IconSunFilled,
-  IconMoonFilled,
   IconBook,
   IconEye,
   IconHome,
-  IconLogout
+  IconLogout,
+  IconMoonFilled,
+  IconSunFilled
 } from '@tabler/icons-react';
-import { useAppDispatch } from '../../redux/hooks';
+import { Link, NavLink, Outlet } from 'react-router-dom';
+import Loading from '../../components/features/loading/Loading';
+import { Suspense } from 'react';
+import directlyLogo from '../../assets/logo.svg';
 import { setAuth } from '../../redux/slices/authSlice';
+import { useAppDispatch } from '../../redux/hooks';
+import { useDisclosure } from '@mantine/hooks';
 
 const Layout: React.FC = (): JSX.Element => {
   // Colour scheme
   const { setColorScheme } = useMantineColorScheme();
-
+  // Side nav
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
-  // Set up navigation and dispatch
+  // Set up dispatch
   const dispatch = useAppDispatch();
 
+  // Logout
   const logout = (): void => {
-    console.log('Logout...');
     dispatch(setAuth(true));
   };
+
   return (
     <AppShell
       header={{ height: 60 }}
@@ -73,34 +74,34 @@ const Layout: React.FC = (): JSX.Element => {
           <Button
             leftSection={<IconSunFilled size={14} />}
             onClick={() => setColorScheme('light')}
-            size='xs'
+            size='sm'
             variant='filled'>
             Light
           </Button>
           <Button
             leftSection={<IconMoonFilled size={14} />}
             onClick={() => setColorScheme('dark')}
-            size='xs'
+            size='sm'
             variant='filled'>
             Dark
           </Button>
           <Button
             color='var(--mantine-color-indigo-9)'
             onClick={() => setColorScheme('auto')}
-            size='xs'
+            size='sm'
             variant='filled'>
             Auto
           </Button>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar className='p-4'>
-        <div className='flex flex-col h-full gap-4'>
+        <div className='flex flex-col h-full gap-6'>
           <div className='w-full'>
             <NavLink to={`/home`}>
               <Button
                 fullWidth
                 leftSection={<IconHome size={14} />}
-                size='xs'
+                size='sm'
                 variant='outline'>
                 Home
               </Button>
@@ -111,7 +112,7 @@ const Layout: React.FC = (): JSX.Element => {
               <Button
                 fullWidth
                 leftSection={<IconBook size={14} />}
-                size='xs'
+                size='sm'
                 variant='outline'>
                 Books
               </Button>
@@ -122,7 +123,7 @@ const Layout: React.FC = (): JSX.Element => {
               <Button
                 fullWidth
                 leftSection={<IconEye size={14} />}
-                size='xs'
+                size='sm'
                 variant='outline'>
                 Viewer
               </Button>
@@ -134,7 +135,7 @@ const Layout: React.FC = (): JSX.Element => {
                 fullWidth
                 leftSection={<IconLogout size={14} />}
                 color='var(--mantine-color-indigo-9)'
-                size='xs'
+                size='sm'
                 onClick={() => logout()}
                 variant='filled'>
                 Logout
@@ -142,11 +143,6 @@ const Layout: React.FC = (): JSX.Element => {
             </NavLink>
           </div>
         </div>
-        {/* {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt='sm' animate={false} />
-          ))} */}
       </AppShell.Navbar>
       <AppShell.Main>
         <Suspense fallback={<Loading />}>
@@ -154,17 +150,9 @@ const Layout: React.FC = (): JSX.Element => {
         </Suspense>
       </AppShell.Main>
     </AppShell>
-
-    // <section aria-label='Layout Section' className='h-full w-full'>
-    //   <Header />
-    //   <Suspense fallback={<Loading />}>
-    //     <div className='p-4 h-full w-full'>
-    //       <Outlet />
-    //     </div>
-    //   </Suspense>
-    // </section>
   );
 };
 
+// EXPORT Layout
 Layout.displayName = 'DIRECTLY | Layout';
 export default Layout;

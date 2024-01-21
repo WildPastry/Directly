@@ -7,6 +7,7 @@ import styles from './List.module.css';
 const SortableList: React.FC<ISortableItems> = (
   props: ISortableItems
 ): JSX.Element => {
+  // Set up state
   const [state, setState] = useState<ISortableItem[]>(() => {
     return props.files.map((file, index) => ({
       id: index + 1,

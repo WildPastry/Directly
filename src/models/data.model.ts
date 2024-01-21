@@ -16,3 +16,7 @@ export interface ISortableItem {
 export interface ISortableItems {
   files: FileWithPath[];
 }
+
+export interface IFileUploaded {
+  fileUploaded: (files: FileWithPath[]) => void;
+}

@@ -7,17 +7,14 @@ import {
 } from '@mantine/dropzone';
 import { Group, Text, rem } from '@mantine/core';
 import { IconPhoto, IconUpload, IconX } from '@tabler/icons-react';
+import { IFileUploaded } from '../../../models/data.model';
 
-interface DropzoneAreaProps {
-  fileUploaded: (files: FileWithPath[]) => void;
-}
-
-export const DropzoneArea: React.FC<
-  DropzoneAreaProps & Partial<DropzoneProps>
-> = ({ fileUploaded, ...props }) => {
+const DropzoneArea: React.FC<IFileUploaded & Partial<DropzoneProps>> = (
+  props: IFileUploaded & Partial<DropzoneProps>
+): JSX.Element => {
   return (
     <Dropzone
-      onDrop={(files: FileWithPath[]) => fileUploaded(files)}
+      onDrop={(files: FileWithPath[]) => props.fileUploaded(files)}
       onReject={(files: FileRejection[]) =>
         console.log('rejected files', files)
       }
@@ -72,3 +69,7 @@ export const DropzoneArea: React.FC<
     </Dropzone>
   );
 };
+
+// EXPORT DropzoneArea
+DropzoneArea.displayName = 'DIRECTLY | DropzoneArea';
+export default DropzoneArea;
