@@ -1,16 +1,27 @@
 /* eslint-disable no-console */
-import { Dropzone, DropzoneProps } from '@mantine/dropzone';
+import {
+  Dropzone,
+  DropzoneProps,
+  FileRejection,
+  FileWithPath
+} from '@mantine/dropzone';
 import { Group, Text, rem } from '@mantine/core';
 import { IconPhoto, IconUpload, IconX } from '@tabler/icons-react';
+import { IFileUploaded } from '../../../models/data.model';
 
-export function DropzoneArea(props: Partial<DropzoneProps>): JSX.Element {
+const DropzoneArea: React.FC<IFileUploaded & Partial<DropzoneProps>> = (
+  props: IFileUploaded & Partial<DropzoneProps>
+): JSX.Element => {
   return (
     <Dropzone
-      onDrop={(files) => console.log('accepted files', files)}
-      onReject={(files) => console.log('rejected files', files)}
+      onDrop={(files: FileWithPath[]) => props.fileUploaded(files)}
+      onReject={(files: FileRejection[]) =>
+        console.log('rejected files', files)
+      }
       maxSize={5 * 1024 ** 2}
       {...props}>
       <Group
+        className='flex justify-center'
         justify='center'
         gap='xl'
         mih={220}
@@ -57,4 +68,8 @@ export function DropzoneArea(props: Partial<DropzoneProps>): JSX.Element {
       </Group>
     </Dropzone>
   );
-}
+};
+
+// EXPORT DropzoneArea
+DropzoneArea.displayName = 'DIRECTLY | DropzoneArea';
+export default DropzoneArea;
