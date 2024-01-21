@@ -17,7 +17,7 @@ const Books: React.FC = (): JSX.Element => {
 
   return (
     <section aria-label='Books Section'>
-      <DropzoneArea fileUploaded={handleFiles} className='mb-3' />
+      <DropzoneArea onFileUploaded={handleFiles} className='mb-3' />
       <Group gap='md' className='mb-3'>
         <Button
           leftSection={<IconLiveView size={14} />}
