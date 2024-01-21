@@ -10,8 +10,8 @@ instance.UI.addEventListener(instance.UI.Events.VIEWER_LOADED, () => {
   });
 
   // instance.UI.disableElement('searchButton');
-  instance.UI.setTheme('dark');
-  instance.UI.enableFeatures([instance.UI.Feature.Portfolio])
+  // instance.UI.setTheme('dark');
+  // instance.UI.enableFeatures([instance.UI.Feature.Portfolio])
 
 });
 

@@ -23,9 +23,8 @@ const Viewer: React.FC = (): JSX.Element => {
   }, []);
 
   return (
-    <section aria-label='Viewer Section' className='h-full w-full'>
-      <h1 className='text-4xl mb-3'>Viewer</h1>
-      <div className='h-full w-full mb-3' ref={webViewerRef} />
+    <section aria-label='Viewer Section' className='h-[calc(100vh-92px)]'>
+      <div className='h-full' ref={webViewerRef} />
     </section>
   );
 };

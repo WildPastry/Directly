@@ -24,6 +24,7 @@ export const DropzoneArea: React.FC<
       maxSize={5 * 1024 ** 2}
       {...props}>
       <Group
+        className='flex justify-center'
         justify='center'
         gap='xl'
         mih={220}

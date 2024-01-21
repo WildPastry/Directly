@@ -29,12 +29,12 @@ const Header: React.FC = (): JSX.Element => {
       <div
         className='mx-auto flex max-w-4xl 
       justify-between h-16 items-center px-4'>
-        <Link to={`/home`}>
+        {/* <Link to={`/home`}>
           <div className='flex justify-between items-center'>
             <img alt='Directly logo' className='w-8 mr-2' src={directlyLogo} />
             <h1 className='font-thin text-2xl tracking-widest'>Directly</h1>
           </div>
-        </Link>
+        </Link> */}
         <Group gap='xs'>
           <NavLink
             to={`/home`}
@@ -77,7 +77,7 @@ const Header: React.FC = (): JSX.Element => {
             </Button>
           </NavLink>
         </Group>
-        <Group gap='xs'>
+        {/* <Group gap='xs'>
           <Button
             leftSection={<IconSunFilled size={14} />}
             onClick={() => setColorScheme('light')}
@@ -98,7 +98,7 @@ const Header: React.FC = (): JSX.Element => {
             variant='filled'>
             Auto
           </Button>
-        </Group>
+        </Group> */}
       </div>
     </header>
   );

@@ -1,9 +1,5 @@
 const Home: React.FC = (): JSX.Element => {
-  return (
-    <section aria-label='Home Section'>
-      <h1 className='text-4xl mb-3'>Home</h1>
-    </section>
-  );
+  return <section aria-label='Home Section' />;
 };
 
 // EXPORT Home

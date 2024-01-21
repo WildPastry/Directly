@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* Temp overrides to inputs */
-input:-webkit-autofill {
+/* input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 100px white inset !important;
   color: black !important;
 }
@@ -11,4 +11,4 @@ input:-webkit-autofill {
 input:-moz-autofill {
   box-shadow: 0 0 0 100px white inset !important;
   color: black !important;
-}
+} */
