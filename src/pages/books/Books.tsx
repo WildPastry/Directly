@@ -2,6 +2,7 @@
 import { DropzoneArea } from '../../components/features/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { useState } from 'react';
+import SortableList from '../../components/layout/list/List';
 
 const Books: React.FC = (): JSX.Element => {
   const [files, setFiles] = useState([] as FileWithPath[]);
@@ -16,6 +17,7 @@ const Books: React.FC = (): JSX.Element => {
   return (
     <section aria-label='Books Section'>
       <DropzoneArea fileUploaded={handleFiles} className='mb-3' />
+      <SortableList />
       {display ? (
         <div className='flex'>
           {files.map((currentFile: FileWithPath) => (

@@ -1,21 +1,18 @@
 /* eslint-disable no-console */
-import { Button, Group, useMantineColorScheme } from '@mantine/core';
+import { Button, Group } from '@mantine/core';
 import {
   IconBook,
   IconEye,
   IconHome,
   IconLogout,
-  IconMoonFilled,
-  IconSunFilled
 } from '@tabler/icons-react';
-import { Link, NavLink } from 'react-router-dom';
-import directlyLogo from '../../../assets/logo.svg';
+import { NavLink } from 'react-router-dom';
 import { setAuth } from '../../../redux/slices/authSlice';
 import { useAppDispatch } from '../../../redux/hooks';
 
 const Header: React.FC = (): JSX.Element => {
   // Colour scheme
-  const { setColorScheme } = useMantineColorScheme();
+  // const { setColorScheme } = useMantineColorScheme();
   // Set up navigation and dispatch
   const dispatch = useAppDispatch();
 

@@ -25,7 +25,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
-    "react-router-dom": "^6.21.1"
+    "react-router-dom": "^6.21.1",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.2.0",
@@ -34,6 +36,7 @@
     "@types/jest": "^29.5.11",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
+    "@types/sortablejs": "^1.15.7",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "@vitejs/plugin-react": "^4.2.1",

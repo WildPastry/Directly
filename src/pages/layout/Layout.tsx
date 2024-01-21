@@ -3,11 +3,9 @@ import {
   Burger,
   Button,
   Group,
-  Skeleton,
   useMantineColorScheme
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import Header from '../../components/layout/header/Header';
 import Loading from '../../components/features/loading/Loading';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
