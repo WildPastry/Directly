@@ -1,10 +1,11 @@
-import { AuthForm } from '../../components/layout/auth-form/AuthForm';
+import directlyLogo from '../../assets/logo.svg';
 
 const Home: React.FC = (): JSX.Element => {
   return (
-    <section aria-label='Home Section'>
-      <h1 className='text-4xl mb-3'>Home</h1>
-      <AuthForm />
+    <section
+      aria-label='Home Section'
+      className='h-[calc(100vh-92px)] flex justify-center items-center'>
+      <img alt='Directly logo' className='w-96' src={directlyLogo} />
     </section>
   );
 };
