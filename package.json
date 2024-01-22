@@ -41,7 +41,7 @@
     "@typescript-eslint/parser": "^6.18.1",
     "@vitejs/plugin-react": "^4.2.1",
     "@wildpastry/eslint-config": "^1.6.4",
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.17",
     "cypress": "^13.6.2",
     "eslint": "^8.56.0",
     "eslint-plugin-prettier": "^5.1.2",
