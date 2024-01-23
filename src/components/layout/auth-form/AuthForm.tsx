@@ -19,7 +19,9 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
 
-export function AuthForm(props: PaperProps) {
+export const AuthForm: React.FC<PaperProps> = (
+  props: PaperProps
+): JSX.Element => {
   // Set up navigation and dispatch
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -137,4 +139,4 @@ export function AuthForm(props: PaperProps) {
       </form>
     </Paper>
   );
-}
+};

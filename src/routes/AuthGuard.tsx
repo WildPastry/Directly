@@ -7,9 +7,7 @@ import { useSelector } from 'react-redux';
 
 const AuthGuard: () => JSX.Element = () => {
   const location = useLocation();
-  const authState = useSelector((state: AppState): IAuth => {
-    return state.auth;
-  });
+  const authState = useSelector((state: AppState): IAuth => state.auth);
 
   // Auth state for public or private routes
   const checkAuth = (): boolean => {
@@ -27,4 +25,5 @@ const AuthGuard: () => JSX.Element = () => {
   );
 };
 
+// EXPORT AuthGuard
 export default AuthGuard;
