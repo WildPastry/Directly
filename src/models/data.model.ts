@@ -1,4 +1,4 @@
-import { DropzoneProps, FileWithPath } from '@mantine/dropzone';
+import { DropzoneProps, FileWithPath } from "@mantine/dropzone";
 
 export interface ILoading {
   isLoading: boolean;
@@ -21,4 +21,6 @@ export interface IFileUploaded {
   onFileUploaded: (files: FileWithPath[]) => void;
 }
 
-export interface IDropzoneProps extends IFileUploaded, Partial<DropzoneProps> {}
+export interface IDropzoneProps extends IFileUploaded, Partial<DropzoneProps> {
+  onFileUploaded: (files: FileWithPath[]) => void;
+}
