@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, {forwardRef, HTMLAttributes} from 'react';
-// // import classNames from 'classnames';
+import classNames from 'classnames';
 
 import styles from './TreeItem.module.css';
 import { Handle } from '../../../components/Item/components/Handle';
@@ -48,14 +48,14 @@ export const TreeItem = forwardRef<HTMLDivElement, Props>(
   ) => {
     return (
       <li
-        // className={classNames(
-        //   styles.Wrapper,
-        //   clone && styles.clone,
-        //   ghost && styles.ghost,
-        //   indicator && styles.indicator,
-        //   disableSelection && styles.disableSelection,
-        //   disableInteraction && styles.disableInteraction
-        // )}
+        className={classNames(
+          styles.Wrapper,
+          clone && styles.clone,
+          ghost && styles.ghost,
+          indicator && styles.indicator,
+          disableSelection && styles.disableSelection,
+          disableInteraction && styles.disableInteraction
+        )}
         ref={wrapperRef}
         style={
           {
@@ -69,10 +69,10 @@ export const TreeItem = forwardRef<HTMLDivElement, Props>(
           {onCollapse && (
             <Action
               onClick={onCollapse}
-              // className={classNames(
-              //   styles.Collapse,
-              //   collapsed && styles.collapsed
-              // )}
+              className={classNames(
+                styles.Collapse,
+                collapsed && styles.collapsed
+              )}
             >
               {collapseIcon}
             </Action>

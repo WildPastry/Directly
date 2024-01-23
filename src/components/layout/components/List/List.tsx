@@ -1,5 +1,5 @@
-import React, {forwardRef} from 'react';
-// import classNames from 'classnames';
+import React, { forwardRef } from 'react';
+import classNames from 'classnames';
 
 import styles from './List.module.css';
 
@@ -11,18 +11,17 @@ export interface Props {
 }
 
 export const List = forwardRef<HTMLUListElement, Props>(
-  ({children, columns = 1, horizontal, style}: Props, ref) => {
+  ({ children, columns = 1, horizontal, style }: Props, ref) => {
     return (
       <ul
         ref={ref}
         style={
           {
             ...style,
-            '--columns': columns,
+            '--columns': columns
           } as React.CSSProperties
         }
-        className={classNames(styles.List, horizontal && styles.horizontal)}
-      >
+        className={classNames(styles.List, horizontal && styles.horizontal)}>
         {children}
       </ul>
     );

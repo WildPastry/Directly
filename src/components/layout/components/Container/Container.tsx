@@ -1,5 +1,5 @@
 import React, {forwardRef} from 'react';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 
 import {Handle, Remove} from '../Item';
 

@@ -1,5 +1,5 @@
 import React, {forwardRef, CSSProperties} from 'react';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 
 import styles from './Action.module.css';
 
@@ -17,7 +17,7 @@ export const Action = forwardRef<HTMLButtonElement, Props>(
       <button
         ref={ref}
         {...props}
-        // className={classNames(styles.Action, className)}
+        className={classNames(styles.Action, className)}
         tabIndex={0}
         style={
           {
