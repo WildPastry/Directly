@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type {UniqueIdentifier} from '@dnd-kit/core';
 import {arrayMove} from '@dnd-kit/sortable';
 

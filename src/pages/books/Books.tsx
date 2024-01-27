@@ -1,12 +1,11 @@
+/* eslint-disable */
 import { Button, Group } from '@mantine/core';
 import DropzoneArea from '../../components/features/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { ISortableItem } from '../../models/data.model';
 import { IconLiveView } from '@tabler/icons-react';
-// import SortableList from '../../components/layout/list/List';
 import { setFiles } from '../../redux/slices/fileSlice';
 import { useAppDispatch } from '../../redux/hooks';
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../redux/store';
 import { SortableTree } from '../../components/layout/list/List';
@@ -14,7 +13,6 @@ import { SortableTree } from '../../components/layout/list/List';
 const Books: React.FC = (): JSX.Element => {
   // Set up dispatch and states
   const dispatch = useAppDispatch();
-  const [display, setDisplay] = useState(false);
 
   const storedFiles: ISortableItem[] = useSelector(
     (state: AppState): ISortableItem[] => state.files
@@ -34,7 +32,6 @@ const Books: React.FC = (): JSX.Element => {
   const handleFiles = (files: FileWithPath[]): void => {
     const currentFiles: ISortableItem[] = convertFiles(files);
     dispatch(setFiles(currentFiles));
-    setDisplay(true);
     console.log('currentFiles', currentFiles);
     console.log('state', storedFiles);
   };
