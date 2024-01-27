@@ -39,33 +39,16 @@ import type { FlattenedItem, SensorContext, TreeItems } from './types';
 import { sortableTreeKeyboardCoordinates } from './keyboardCoordinates';
 import { SortableTreeItem } from './components';
 import { CSS } from '@dnd-kit/utilities';
+import { useSelector } from 'react-redux';
+import { ISortableItem, ISortableItems } from '../../../models/data.model';
+import { AppState } from '../../../redux/store';
 
-const initialItems: TreeItems = [
-  {
-    id: 'Home',
-    children: []
-  },
-  {
-    id: 'Collections',
-    children: [
-      { id: 'Spring', children: [] },
-      { id: 'Summer', children: [] },
-      { id: 'Fall', children: [] },
-      { id: 'Winter', children: [] }
-    ]
-  },
-  {
-    id: 'About Us',
-    children: []
-  },
-  {
-    id: 'My Account',
-    children: [
-      { id: 'Addresses', children: [] },
-      { id: 'Order History', children: [] }
-    ]
-  }
-];
+const getInitialItems = (): ISortableItems => {
+  const storedFiles: ISortableItem[] = useSelector(
+  (state: AppState): ISortableItem[] => state.files
+);
+return storedFiles;
+};
 
 const measuring = {
   droppable: {
@@ -106,7 +89,7 @@ interface Props {
 
 export function SortableTree({
   collapsible,
-  defaultItems = initialItems,
+  defaultItems = getInitialItems(),
   indicator = false,
   indentationWidth = 50,
   removable
@@ -165,7 +148,12 @@ export function SortableTree({
     ? flattenedItems.find(({ id }) => id === activeId)
     : null;
 
+    const storedFiles: ISortableItem[] = useSelector(
+      (state: AppState): ISortableItem[] => state.files
+    );
+    
   useEffect(() => {
+    console.log('state', storedFiles);
     sensorContext.current = {
       items: flattenedItems,
       offset: offsetLeft
@@ -202,11 +190,11 @@ export function SortableTree({
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}>
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(({ id, children, collapsed, depth }) => (
+        {flattenedItems.map(({ id, name, children, collapsed, depth }) => (
           <SortableTreeItem
             key={id}
             id={id}
-            value={id.toString()}
+            value={name}
             depth={id === activeId && projected ? projected.depth : depth}
             indentationWidth={indentationWidth}
             indicator={indicator}
@@ -229,7 +217,7 @@ export function SortableTree({
                 depth={activeItem.depth}
                 clone
                 childCount={getChildCount(items, activeId) + 1}
-                value={activeId.toString()}
+                value={activeItem.name}
                 indentationWidth={indentationWidth}
               />
             ) : null}

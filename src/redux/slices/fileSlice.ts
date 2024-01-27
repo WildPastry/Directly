@@ -21,22 +21,21 @@ const fileSlice = createSlice({
   }
 });
 
-// export const { setFiles } = fileSlice.actions;
-
 // Export set file actions from fileSlice
 export const setFiles =
   (files: ISortableItem[]): AppThunk =>
   (dispatch) => {
     try {
-      // Reset files first
-      // dispatch(fileSlice.actions.resetFiles());
       // Map each file
       const setFile: ISortableItem[] = files.map((file) => ({
         id: file.id,
         name: file.name,
-        size: file.size,
-        type: file.type,
-        lastModified: file.lastModified
+        data: {
+          size: file.data.size,
+          type: file.data.type,
+          lastModified: file.data.lastModified
+        },
+        children: file.children
       }));
       // Dispatch files once finished mapping
       dispatch(fileSlice.actions.setFiles(setFile));

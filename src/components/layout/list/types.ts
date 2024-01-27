@@ -3,6 +3,12 @@ import type { UniqueIdentifier } from '@dnd-kit/core';
 
 export interface TreeItem {
   id: UniqueIdentifier;
+  name: string;
+  data: {
+    size: number;
+    type: string;
+    lastModified: number;
+  };
   children: TreeItem[];
   collapsed?: boolean;
 }

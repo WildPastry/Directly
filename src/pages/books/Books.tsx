@@ -22,9 +22,12 @@ const Books: React.FC = (): JSX.Element => {
     return files.map((file, index) => ({
       id: index + 1,
       name: file.name || 'Not available',
-      size: file.size || 0,
-      type: file.type || 'Not available',
-      lastModified: file.lastModified || 0
+      data: {
+        size: file.size || 0,
+        type: file.type || 'Not available',
+        lastModified: file.lastModified || 0
+      },
+      children: []
     }));
   };
 

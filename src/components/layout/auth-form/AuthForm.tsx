@@ -112,6 +112,9 @@ export const AuthForm: React.FC<PaperProps> = (
 
           {type === 'register' && (
             <Checkbox
+              classNames={{
+                inner: 'ml-3'
+              }}
               label='I accept terms and conditions'
               checked={form.values.terms}
               onChange={(event) =>

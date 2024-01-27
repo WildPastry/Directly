@@ -1,3 +1,4 @@
+import { UniqueIdentifier } from "@dnd-kit/core";
 import { DropzoneProps, FileWithPath } from "@mantine/dropzone";
 
 export interface ILoading {
@@ -5,16 +6,18 @@ export interface ILoading {
   isError: boolean;
 }
 
-export interface ISortableItem {
-  id: number;
-  name: string;
-  size: number;
-  type: string;
-  lastModified: number;
-}
+export type ISortableItems = ISortableItem[];
 
-export interface ISortableItems {
-  files: FileWithPath[];
+export interface ISortableItem {
+  id: UniqueIdentifier;
+  name: string;
+  data: {
+    size: number;
+    type: string;
+    lastModified: number;
+  };
+  children: ISortableItem[];
+  collapsed?: boolean;
 }
 
 export interface IFileUploaded {
