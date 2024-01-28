@@ -4,17 +4,11 @@ import { FileWithPath } from '@mantine/dropzone';
 import { ISortableItem } from '../../models/data.model';
 import { setFiles } from '../../redux/slices/fileSlice';
 import { useAppDispatch } from '../../redux/hooks';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../redux/store';
 import { SortableTree } from '../../components/layout/list/List';
 
 const Books: React.FC = (): JSX.Element => {
   // Set up dispatch and states
   const dispatch = useAppDispatch();
-
-  const storedFiles: ISortableItem[] = useSelector(
-    (state: AppState): ISortableItem[] => state.files
-  );
 
   const convertFiles = (files: FileWithPath[]): ISortableItem[] => {
     return files.map((file, index) => ({
@@ -25,7 +19,8 @@ const Books: React.FC = (): JSX.Element => {
         type: file.type || 'Not available',
         lastModified: file.lastModified || 0
       },
-      children: []
+      children: [],
+      collapsed: false
     }));
   };
 
@@ -33,8 +28,6 @@ const Books: React.FC = (): JSX.Element => {
   const handleFiles = (files: FileWithPath[]): void => {
     const currentFiles: ISortableItem[] = convertFiles(files);
     dispatch(setFiles(currentFiles));
-    // console.log('currentFiles', currentFiles);
-    // console.log('state', storedFiles);
   };
 
   return (

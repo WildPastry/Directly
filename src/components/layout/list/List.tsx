@@ -45,71 +45,6 @@ import { AppState } from '../../../redux/store';
 import { useAppDispatch } from '../../../redux/hooks';
 import { orderFiles } from '../../../redux/slices/fileSlice';
 
-const initialItems: ISortableItems = [
-  {
-    id: 'Home',
-    name: 'Home',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
-    children: []
-  },
-  {
-    id: 'Collections',
-    name: 'Collections',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
-    children: [
-      {
-        id: 'Spring',
-        name: 'Spring',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Summer',
-        name: 'Summer',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Fall',
-        name: 'Fall',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Winter',
-        name: 'Winter',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      }
-    ]
-  },
-  {
-    id: 'About Us',
-    name: 'About Us',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
-    children: []
-  },
-  {
-    id: 'My Account',
-    name: 'My Account',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
-    children: [
-      {
-        id: 'Addresses',
-        name: 'Addresses',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Order History',
-        name: 'Order History',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      }
-    ]
-  }
-];
-
 const measuring = {
   droppable: {
     strategy: MeasuringStrategy.Always
@@ -158,7 +93,7 @@ export function SortableTree({
   );
   // Set up dispatch and states
   const dispatch = useAppDispatch();
-  const [items, setItems] = useState<ISortableItems>(initialItems);
+  const [items, setItems] = useState<ISortableItems>(storedFiles);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
   const [offsetLeft, setOffsetLeft] = useState(0);
@@ -213,9 +148,8 @@ export function SortableTree({
     : null;
 
   useEffect(() => {
-    // setItems(initialItems);
+    setItems(storedFiles);
     // console.log('state', storedFiles);
-    console.log(initialItems);
     sensorContext.current = {
       items: flattenedItems,
       offset: offsetLeft
@@ -335,8 +269,8 @@ export function SortableTree({
 
       console.log('handleDragEnd', activeIndex);
 
-      setItems(newItems);
-      // dispatch(orderFiles(newItems));
+      // setItems(newItems);
+      dispatch(orderFiles(newItems));
     }
   }
 
@@ -355,24 +289,24 @@ export function SortableTree({
 
   function handleRemove(id: UniqueIdentifier) {
     console.log('handleRemove', id);
-    setItems((items) => removeItem(items, id));
-    // dispatch(orderFiles(removeItem(items, id)));
+    // setItems((items) => removeItem(items, id));
+    dispatch(orderFiles(removeItem(items, id)));
   }
 
   function handleCollapse(id: UniqueIdentifier) {
     console.log('handleCollapse');
-    setItems((items) =>
-      setProperty(items, id, 'collapsed', (value) => {
-        return !value;
-      })
-    );
-    // dispatch(
-    //   orderFiles(
-    //     setProperty(items, id, 'collapsed', (value) => {
-    //       return !value;
-    //     })
-    //   )
+    // setItems((items) =>
+    //   setProperty(items, id, 'collapsed', (value) => {
+    //     return !value;
+    //   })
     // );
+    dispatch(
+      orderFiles(
+        setProperty(items, id, 'collapsed', (value) => {
+          return !value;
+        })
+      )
+    );
   }
 
   function getMovementAnnouncement(

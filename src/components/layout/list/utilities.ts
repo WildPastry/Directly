@@ -1,12 +1,14 @@
-import type { UniqueIdentifier } from '@dnd-kit/core';
-import { arrayMove } from '@dnd-kit/sortable';
+/* eslint-disable no-continue */
+/* eslint-disable no-unused-vars */
 import {
   FlattenedItem,
   ISortableItem,
   ISortableItems
 } from '../../../models/data.model';
+import type { UniqueIdentifier } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 
-export const iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+export const iOS = /iPad|iPhone|iPod/u.test(navigator.platform);
 
 function getDragDepth(offset: number, indentationWidth: number) {
   return Math.round(offset / indentationWidth);
@@ -150,22 +152,22 @@ export function findItemDeep(
   return undefined;
 }
 
-export function removeItem(items: ISortableItems, id: UniqueIdentifier) {
-  const newItems = [];
-
-  for (const item of items) {
+export function removeItem(
+  items: ISortableItems,
+  id: UniqueIdentifier
+): ISortableItem[] {
+  return items.reduce((newItems, item) => {
     if (item.id === id) {
-      continue;
+      return newItems;
     }
 
-    if (item.children.length) {
-      item.children = removeItem(item.children, id);
-    }
+    const updatedItem: ISortableItem = {
+      ...item,
+      children: removeItem(item.children, id)
+    };
 
-    newItems.push(item);
-  }
-
-  return newItems;
+    return [...newItems, updatedItem];
+  }, [] as ISortableItems);
 }
 
 export function setProperty<T extends keyof ISortableItem>(
@@ -173,19 +175,24 @@ export function setProperty<T extends keyof ISortableItem>(
   id: UniqueIdentifier,
   property: T,
   setter: (value: ISortableItem[T]) => ISortableItem[T]
-) {
-  for (const item of items) {
+): ISortableItems {
+  return items.map((item) => {
     if (item.id === id) {
-      item[property] = setter(item[property]);
-      continue;
+      return {
+        ...item,
+        [property]: setter(item[property])
+      };
     }
 
     if (item.children.length) {
-      item.children = setProperty(item.children, id, property, setter);
+      return {
+        ...item,
+        children: setProperty(item.children, id, property, setter)
+      };
     }
-  }
 
-  return [...items];
+    return item;
+  });
 }
 
 function countChildren(items: ISortableItem[], count = 0): number {

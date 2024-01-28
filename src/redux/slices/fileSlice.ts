@@ -38,7 +38,8 @@ export const setFiles =
           type: file.data.type,
           lastModified: file.data.lastModified
         },
-        children: file.children
+        children: file.children,
+        collapsed: file.collapsed
       }));
       // Dispatch files once finished mapping
       dispatch(fileSlice.actions.setFiles(setFile));
@@ -63,7 +64,8 @@ export const orderFiles =
           type: file.data.type,
           lastModified: file.data.lastModified
         },
-        children: file.children
+        children: file.children,
+        collapsed: file.collapsed
       }));
       // Dispatch files once finished mapping
       dispatch(fileSlice.actions.orderFiles(setFile));
