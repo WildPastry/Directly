@@ -7,7 +7,6 @@ import {
 } from '@mantine/core';
 import {
   IconBook,
-  IconEye,
   IconHome,
   IconLogout,
   IconMoonFilled,
@@ -118,17 +117,6 @@ const Layout: React.FC = (): JSX.Element => {
               </Button>
             </NavLink>
           </div>
-          {/* <div className='w-full'>
-            <NavLink to={`/viewer`}>
-              <Button
-                fullWidth
-                leftSection={<IconEye size={14} />}
-                size='sm'
-                variant='outline'>
-                Viewer
-              </Button>
-            </NavLink>
-          </div> */}
           <div className='w-full mt-auto'>
             <NavLink to={`/login`}>
               <Button

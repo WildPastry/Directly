@@ -169,6 +169,8 @@ export function setProperty<T extends keyof ISortableItem>(
   property: T,
   setter: (value: ISortableItem[T]) => ISortableItem[T]
 ) {
+  console.log(items, id);
+  
   for (const item of items) {
     if (item.id === id) {
       item[property] = setter(item[property]);

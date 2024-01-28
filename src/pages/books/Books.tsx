@@ -1,9 +1,7 @@
 /* eslint-disable */
-import { Button, Group } from '@mantine/core';
 import DropzoneArea from '../../components/features/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { ISortableItem } from '../../models/data.model';
-import { IconLiveView } from '@tabler/icons-react';
 import { setFiles } from '../../redux/slices/fileSlice';
 import { useAppDispatch } from '../../redux/hooks';
 import { useSelector } from 'react-redux';
@@ -19,8 +17,8 @@ const Books: React.FC = (): JSX.Element => {
   );
 
   const convertFiles = (files: FileWithPath[]): ISortableItem[] => {
-    return files.map((file) => ({
-      id: self.crypto.randomUUID(),
+    return files.map((file, index) => ({
+      id: index + 1,
       name: file.name || 'Not available',
       data: {
         size: file.size || 0,

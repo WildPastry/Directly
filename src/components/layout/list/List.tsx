@@ -284,11 +284,13 @@ export function SortableTree({
   }
 
   function handleRemove(id: UniqueIdentifier) {
+    console.log('handleRemove')
     setItems((items) => removeItem(items, id));
     dispatch(orderFiles(removeItem(items, id)));
   }
 
   function handleCollapse(id: UniqueIdentifier) {
+    console.log('handleCollapse')
     setItems((items) =>
       setProperty(items, id, 'collapsed', (value) => {
         return !value;
