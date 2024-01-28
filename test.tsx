@@ -35,77 +35,34 @@ import {
   removeChildrenOf,
   setProperty
 } from './utilities';
-import type { FlattenedItem, SensorContext } from '../../../models/data.model';
+import type { FlattenedItem, SensorContext, TreeItems } from './types';
 import { sortableTreeKeyboardCoordinates } from './keyboardCoordinates';
 import { SortableTreeItem } from './components';
 import { CSS } from '@dnd-kit/utilities';
-import { useSelector } from 'react-redux';
-import { ISortableItem, ISortableItems } from '../../../models/data.model';
-import { AppState } from '../../../redux/store';
-import { useAppDispatch } from '../../../redux/hooks';
-import { orderFiles } from '../../../redux/slices/fileSlice';
 
-const initialItems: ISortableItems = [
+const initialItems: TreeItems = [
   {
     id: 'Home',
-    name: 'Home',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
     children: []
   },
   {
     id: 'Collections',
-    name: 'Collections',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
     children: [
-      {
-        id: 'Spring',
-        name: 'Spring',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Summer',
-        name: 'Summer',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Fall',
-        name: 'Fall',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Winter',
-        name: 'Winter',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      }
+      { id: 'Spring', children: [] },
+      { id: 'Summer', children: [] },
+      { id: 'Fall', children: [] },
+      { id: 'Winter', children: [] }
     ]
   },
   {
     id: 'About Us',
-    name: 'About Us',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
     children: []
   },
   {
     id: 'My Account',
-    name: 'My Account',
-    data: { size: 0, type: 'Not available', lastModified: 0 },
     children: [
-      {
-        id: 'Addresses',
-        name: 'Addresses',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      },
-      {
-        id: 'Order History',
-        name: 'Order History',
-        data: { size: 0, type: 'Not available', lastModified: 0 },
-        children: []
-      }
+      { id: 'Addresses', children: [] },
+      { id: 'Order History', children: [] }
     ]
   }
 ];
@@ -141,24 +98,20 @@ const dropAnimationConfig: DropAnimation = {
 
 interface Props {
   collapsible?: boolean;
-  defaultItems?: ISortableItems;
+  defaultItems?: TreeItems;
   indentationWidth?: number;
   indicator?: boolean;
   removable?: boolean;
 }
 
 export function SortableTree({
-  collapsible = true,
+  collapsible,
+  defaultItems = initialItems,
   indicator = false,
   indentationWidth = 50,
-  removable = true
+  removable
 }: Props) {
-  const storedFiles: ISortableItem[] = useSelector(
-    (state: AppState): ISortableItem[] => state.files
-  );
-  // Set up dispatch and states
-  const dispatch = useAppDispatch();
-  const [items, setItems] = useState<ISortableItems>(initialItems);
+  const [items, setItems] = useState(() => defaultItems);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
   const [offsetLeft, setOffsetLeft] = useState(0);
@@ -213,14 +166,11 @@ export function SortableTree({
     : null;
 
   useEffect(() => {
-    // setItems(initialItems);
-    // console.log('state', storedFiles);
-    console.log(initialItems);
     sensorContext.current = {
       items: flattenedItems,
       offset: offsetLeft
     };
-  }, [flattenedItems, offsetLeft, storedFiles]);
+  }, [flattenedItems, offsetLeft]);
 
   const announcements: Announcements = {
     onDragStart({ active }) {
@@ -252,11 +202,11 @@ export function SortableTree({
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}>
       <SortableContext items={sortedIds} strategy={verticalListSortingStrategy}>
-        {flattenedItems.map(({ id, name, children, collapsed, depth }) => (
+        {flattenedItems.map(({ id, children, collapsed, depth }) => (
           <SortableTreeItem
             key={id}
             id={id}
-            value={name ?? ''}
+            value={id.toString()}
             depth={id === activeId && projected ? projected.depth : depth}
             indentationWidth={indentationWidth}
             indicator={indicator}
@@ -279,7 +229,7 @@ export function SortableTree({
                 depth={activeItem.depth}
                 clone
                 childCount={getChildCount(items, activeId) + 1}
-                value={activeItem.name ?? ''}
+                value={activeId.toString()}
                 indentationWidth={indentationWidth}
               />
             ) : null}
@@ -291,8 +241,6 @@ export function SortableTree({
   );
 
   function handleDragStart({ active: { id: activeId } }: DragStartEvent) {
-    console.log('handleDragEnd', activeId);
-  
     setActiveId(activeId);
     setOverId(activeId);
 
@@ -333,10 +281,7 @@ export function SortableTree({
       const sortedItems = arrayMove(clonedItems, activeIndex, overIndex);
       const newItems = buildTree(sortedItems);
 
-      console.log('handleDragEnd', activeIndex);
-
       setItems(newItems);
-      // dispatch(orderFiles(newItems));
     }
   }
 
@@ -354,25 +299,15 @@ export function SortableTree({
   }
 
   function handleRemove(id: UniqueIdentifier) {
-    console.log('handleRemove', id);
     setItems((items) => removeItem(items, id));
-    // dispatch(orderFiles(removeItem(items, id)));
   }
 
   function handleCollapse(id: UniqueIdentifier) {
-    console.log('handleCollapse');
     setItems((items) =>
       setProperty(items, id, 'collapsed', (value) => {
         return !value;
       })
     );
-    // dispatch(
-    //   orderFiles(
-    //     setProperty(items, id, 'collapsed', (value) => {
-    //       return !value;
-    //     })
-    //   )
-    // );
   }
 
   function getMovementAnnouncement(
