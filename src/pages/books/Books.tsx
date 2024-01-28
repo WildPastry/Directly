@@ -11,8 +11,8 @@ const Books: React.FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const convertFiles = (files: FileWithPath[]): ISortableItem[] => {
-    return files.map((file, index) => ({
-      id: index + 1,
+    return files.map((file) => ({
+      id: self.crypto.randomUUID(),
       name: file.name || 'Not available',
       data: {
         size: file.size || 0,
