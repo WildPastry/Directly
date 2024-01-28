@@ -17,6 +17,9 @@ const fileSlice = createSlice({
     resetFiles: () => initialState,
     setFiles(state, action: PayloadAction<ISortableItem[]>) {
       action.payload.forEach((file: ISortableItem) => state.push(file));
+    },
+    orderFiles(state, action: PayloadAction<ISortableItem[]>) {
+      action.payload.forEach((file: ISortableItem) => state.push(file));
     }
   }
 });
@@ -39,6 +42,31 @@ export const setFiles =
       }));
       // Dispatch files once finished mapping
       dispatch(fileSlice.actions.setFiles(setFile));
+      dispatch(setLoading(false));
+    } catch (err) {
+      // Create error page if failed
+      dispatch(setError(true));
+    }
+  };
+
+export const orderFiles =
+  (files: ISortableItem[]): AppThunk =>
+  (dispatch) => {
+    try {
+      dispatch(fileSlice.actions.resetFiles());
+      // Map each file
+      const setFile: ISortableItem[] = files.map((file) => ({
+        id: file.id,
+        name: file.name,
+        data: {
+          size: file.data.size,
+          type: file.data.type,
+          lastModified: file.data.lastModified
+        },
+        children: file.children
+      }));
+      // Dispatch files once finished mapping
+      dispatch(fileSlice.actions.orderFiles(setFile));
       dispatch(setLoading(false));
     } catch (err) {
       // Create error page if failed

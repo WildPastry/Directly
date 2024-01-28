@@ -19,8 +19,8 @@ const Books: React.FC = (): JSX.Element => {
   );
 
   const convertFiles = (files: FileWithPath[]): ISortableItem[] => {
-    return files.map((file, index) => ({
-      id: index + 1,
+    return files.map((file) => ({
+      id: self.crypto.randomUUID(),
       name: file.name || 'Not available',
       data: {
         size: file.size || 0,
@@ -42,14 +42,14 @@ const Books: React.FC = (): JSX.Element => {
   return (
     <section aria-label='Books Section'>
       <DropzoneArea onFileUploaded={handleFiles} className='mb-3' />
-      <Group gap='md' className='mb-3'>
+      {/* <Group gap='md' className='mb-3'>
         <Button
           leftSection={<IconLiveView size={14} />}
           size='sm'
           variant='outline'>
           Preview
         </Button>
-      </Group>
+      </Group> */}
       <SortableTree />
     </section>
   );

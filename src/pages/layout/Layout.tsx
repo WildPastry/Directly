@@ -118,7 +118,7 @@ const Layout: React.FC = (): JSX.Element => {
               </Button>
             </NavLink>
           </div>
-          <div className='w-full'>
+          {/* <div className='w-full'>
             <NavLink to={`/viewer`}>
               <Button
                 fullWidth
@@ -128,7 +128,7 @@ const Layout: React.FC = (): JSX.Element => {
                 Viewer
               </Button>
             </NavLink>
-          </div>
+          </div> */}
           <div className='w-full mt-auto'>
             <NavLink to={`/login`}>
               <Button

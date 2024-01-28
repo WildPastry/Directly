@@ -35,20 +35,15 @@ import {
   removeChildrenOf,
   setProperty
 } from './utilities';
-import type { FlattenedItem, SensorContext, TreeItems } from './types';
+import type { FlattenedItem, SensorContext } from '../../../models/data.model';
 import { sortableTreeKeyboardCoordinates } from './keyboardCoordinates';
 import { SortableTreeItem } from './components';
 import { CSS } from '@dnd-kit/utilities';
 import { useSelector } from 'react-redux';
 import { ISortableItem, ISortableItems } from '../../../models/data.model';
 import { AppState } from '../../../redux/store';
-
-const getInitialItems = (): ISortableItems => {
-  const storedFiles: ISortableItem[] = useSelector(
-  (state: AppState): ISortableItem[] => state.files
-);
-return storedFiles;
-};
+import { useAppDispatch } from '../../../redux/hooks';
+import { orderFiles } from '../../../redux/slices/fileSlice';
 
 const measuring = {
   droppable: {
@@ -81,20 +76,24 @@ const dropAnimationConfig: DropAnimation = {
 
 interface Props {
   collapsible?: boolean;
-  defaultItems?: TreeItems;
+  defaultItems?: ISortableItems;
   indentationWidth?: number;
   indicator?: boolean;
   removable?: boolean;
 }
 
 export function SortableTree({
-  collapsible,
-  defaultItems = getInitialItems(),
+  collapsible = true,
   indicator = false,
   indentationWidth = 50,
-  removable
+  removable = true
 }: Props) {
-  const [items, setItems] = useState(() => defaultItems);
+  const storedFiles: ISortableItem[] = useSelector(
+    (state: AppState): ISortableItem[] => state.files
+  );
+    // Set up dispatch and states
+    const dispatch = useAppDispatch();
+  const [items, setItems] = useState<ISortableItems>(storedFiles);
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [overId, setOverId] = useState<UniqueIdentifier | null>(null);
   const [offsetLeft, setOffsetLeft] = useState(0);
@@ -148,17 +147,14 @@ export function SortableTree({
     ? flattenedItems.find(({ id }) => id === activeId)
     : null;
 
-    const storedFiles: ISortableItem[] = useSelector(
-      (state: AppState): ISortableItem[] => state.files
-    );
-    
   useEffect(() => {
+    setItems(storedFiles);
     console.log('state', storedFiles);
     sensorContext.current = {
       items: flattenedItems,
       offset: offsetLeft
     };
-  }, [flattenedItems, offsetLeft]);
+  }, [flattenedItems, offsetLeft, storedFiles]);
 
   const announcements: Announcements = {
     onDragStart({ active }) {
@@ -194,7 +190,7 @@ export function SortableTree({
           <SortableTreeItem
             key={id}
             id={id}
-            value={name}
+            value={name ?? ''}
             depth={id === activeId && projected ? projected.depth : depth}
             indentationWidth={indentationWidth}
             indicator={indicator}
@@ -217,7 +213,7 @@ export function SortableTree({
                 depth={activeItem.depth}
                 clone
                 childCount={getChildCount(items, activeId) + 1}
-                value={activeItem.name}
+                value={activeItem.name ?? ''}
                 indentationWidth={indentationWidth}
               />
             ) : null}
@@ -270,6 +266,7 @@ export function SortableTree({
       const newItems = buildTree(sortedItems);
 
       setItems(newItems);
+      dispatch(orderFiles(newItems));
     }
   }
 
@@ -288,6 +285,7 @@ export function SortableTree({
 
   function handleRemove(id: UniqueIdentifier) {
     setItems((items) => removeItem(items, id));
+    dispatch(orderFiles(removeItem(items, id)));
   }
 
   function handleCollapse(id: UniqueIdentifier) {
@@ -296,6 +294,9 @@ export function SortableTree({
         return !value;
       })
     );
+    dispatch(orderFiles(setProperty(items, id, 'collapsed', (value) => {
+      return !value;
+    })));
   }
 
   function getMovementAnnouncement(

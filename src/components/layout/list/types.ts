@@ -1,5 +1,6 @@
 import type { MutableRefObject } from 'react';
 import type { UniqueIdentifier } from '@dnd-kit/core';
+import { FlattenedItem } from '../../../models/data.model';
 
 export interface TreeItem {
   id: UniqueIdentifier;
@@ -15,13 +16,13 @@ export interface TreeItem {
 
 export type TreeItems = TreeItem[];
 
-export interface FlattenedItem extends TreeItem {
-  parentId: UniqueIdentifier | null;
-  depth: number;
-  index: number;
-}
+// export interface FlattenedItem extends TreeItem {
+//   parentId: UniqueIdentifier | null;
+//   depth: number;
+//   index: number;
+// }
 
-export type SensorContext = MutableRefObject<{
-  items: FlattenedItem[];
-  offset: number;
-}>;
+// export type SensorContext = MutableRefObject<{
+//   items: FlattenedItem[];
+//   offset: number;
+// }>;

@@ -1,5 +1,6 @@
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { DropzoneProps, FileWithPath } from "@mantine/dropzone";
+import { MutableRefObject } from "react";
 
 export interface ILoading {
   isLoading: boolean;
@@ -18,6 +19,17 @@ export interface ISortableItem {
   };
   children: ISortableItem[];
   collapsed?: boolean;
+}
+
+export type SensorContext = MutableRefObject<{
+  items: FlattenedItem[];
+  offset: number;
+}>;
+
+export interface FlattenedItem extends ISortableItem {
+  parentId: UniqueIdentifier | null;
+  depth: number;
+  index: number;
 }
 
 export interface IFileUploaded {
