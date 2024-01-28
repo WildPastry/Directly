@@ -149,7 +149,6 @@ export function SortableTree({
 
   useEffect(() => {
     setItems(storedFiles);
-    // console.log('state', storedFiles);
     sensorContext.current = {
       items: flattenedItems,
       offset: offsetLeft
@@ -269,7 +268,6 @@ export function SortableTree({
 
       console.log('handleDragEnd', activeIndex);
 
-      // setItems(newItems);
       dispatch(orderFiles(newItems));
     }
   }
@@ -289,17 +287,11 @@ export function SortableTree({
 
   function handleRemove(id: UniqueIdentifier) {
     console.log('handleRemove', id);
-    // setItems((items) => removeItem(items, id));
     dispatch(orderFiles(removeItem(items, id)));
   }
 
   function handleCollapse(id: UniqueIdentifier) {
     console.log('handleCollapse');
-    // setItems((items) =>
-    //   setProperty(items, id, 'collapsed', (value) => {
-    //     return !value;
-    //   })
-    // );
     dispatch(
       orderFiles(
         setProperty(items, id, 'collapsed', (value) => {
