@@ -15,7 +15,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mantine/core": "^7.4.1",
+    "@mantine/core": "^7.5.0",
     "@mantine/dropzone": "^7.4.1",
     "@mantine/form": "^7.4.1",
     "@mantine/hooks": "^7.4.1",
