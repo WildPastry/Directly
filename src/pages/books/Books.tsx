@@ -28,6 +28,7 @@ const Books: React.FC = (): JSX.Element => {
   const handleFiles = (files: FileWithPath[]): void => {
     const currentFiles: ISortableItem[] = convertFiles(files);
     dispatch(setFiles(currentFiles));
+    console.log(currentFiles);
   };
 
   return (

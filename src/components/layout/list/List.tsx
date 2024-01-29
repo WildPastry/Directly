@@ -212,7 +212,7 @@ export function SortableTree({
                 depth={activeItem.depth}
                 clone
                 childCount={getChildCount(items, activeId) + 1}
-                value={activeItem.name ?? ''}
+                value={activeItem.name.toString() ?? ''}
                 indentationWidth={indentationWidth}
               />
             ) : null}
@@ -224,7 +224,7 @@ export function SortableTree({
   );
 
   function handleDragStart({ active: { id: activeId } }: DragStartEvent) {
-    console.log('handleDragEnd', activeId);
+    console.log('handleDragStart', activeId);
   
     setActiveId(activeId);
     setOverId(activeId);
