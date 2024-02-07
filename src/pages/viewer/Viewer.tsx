@@ -13,7 +13,6 @@ const Viewer: React.FC = (): JSX.Element => {
         path: 'lib',
         fullAPI: true,
         licenseKey: licenseKey,
-        enableFilePicker: true,
         config: '../../../config.js'
       },
       webViewerRef.current as HTMLDivElement
