@@ -6,13 +6,13 @@ import {
   useMantineColorScheme
 } from '@mantine/core';
 import {
-  IconBook,
+  IconArrowsSort,
   IconBooks,
-  IconEye,
   IconHome,
   IconLogout,
   IconMoonFilled,
-  IconSunFilled
+  IconSunFilled,
+  IconUpload
 } from '@tabler/icons-react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import Loading from '../../components/features/loading/Loading';
@@ -108,7 +108,18 @@ const Layout: React.FC = (): JSX.Element => {
               </Button>
             </NavLink>
           </div>
-          <div className='w-full'>
+          {/* <div className='w-full'>
+            <NavLink to={`/upload`}>
+              <Button
+                fullWidth
+                leftSection={<IconUpload size={14} />}
+                size='sm'
+                variant='outline'>
+                Upload
+              </Button>
+            </NavLink>
+          </div> */}
+          {/* <div className='w-full'>
             <NavLink to={`/books`}>
               <Button
                 fullWidth
@@ -118,7 +129,7 @@ const Layout: React.FC = (): JSX.Element => {
                 Books
               </Button>
             </NavLink>
-          </div>
+          </div> */}
           {/* <div className='w-full'>
             <NavLink to={`/viewer`}>
               <Button
@@ -138,6 +149,17 @@ const Layout: React.FC = (): JSX.Element => {
                 size='sm'
                 variant='outline'>
                 Library
+              </Button>
+            </NavLink>
+          </div>
+          <div className='w-full'>
+            <NavLink to={`/sorting`}>
+              <Button
+                fullWidth
+                leftSection={<IconArrowsSort size={14} />}
+                size='sm'
+                variant='outline'>
+                Sorting
               </Button>
             </NavLink>
           </div>

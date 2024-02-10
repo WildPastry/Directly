@@ -1,22 +1,14 @@
-/* eslint-disable no-console */
-import { AppState } from '../../redux/store';
 import DropzoneArea from '../../components/features/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { ISortableItem } from '../../models/data.model';
 import { notifications } from '@mantine/notifications';
 import { setFiles } from '../../redux/slices/fileSlice';
 import { useAppDispatch } from '../../redux/hooks';
-import { useSelector } from 'react-redux';
 
-const Library: React.FC = (): JSX.Element => {
+const Upload: React.FC = (): JSX.Element => {
   // Set up dispatch and states
   const dispatch = useAppDispatch();
 
-  const storedFiles: ISortableItem[] = useSelector(
-    (state: AppState): ISortableItem[] => state.files
-  );
-
-  // Convert files
   const convertFiles = (files: FileWithPath[]): ISortableItem[] => {
     return files.map((file) => ({
       id: self.crypto.randomUUID(),
@@ -36,34 +28,24 @@ const Library: React.FC = (): JSX.Element => {
     const currentFiles: ISortableItem[] = convertFiles(files);
     dispatch(setFiles(currentFiles));
     console.log(currentFiles);
-    showNotification(currentFiles);
+    showNotification();
   };
 
   // Notification
-  const showNotification = (items: ISortableItem[]): void => {
+  const showNotification = (): void => {
     notifications.show({
-      title: `Success`,
-      message: `Added ${items.length} files`
+      title: 'Default notification',
+      message: 'Hey there, your code is awesome! 🤥'
     });
   };
 
-  // View PDF
-  const viewPdf = (file: ISortableItem): void => {
-    console.log(file);
-  };
-
   return (
-    <section aria-label='Library Section'>
+    <section aria-label='Upload Section'>
       <DropzoneArea onFileUploaded={handleFiles} className='mb-3' />
-      {storedFiles.map((file) => (
-        <div key={file.id} onClick={() => viewPdf(file)}>
-          {file.name}
-        </div>
-      ))}
     </section>
   );
 };
 
-// EXPORT Library
-Library.displayName = 'DIRECTLY | Library';
-export default Library;
+// EXPORT Upload
+Upload.displayName = 'DIRECTLY | Upload';
+export default Upload;
