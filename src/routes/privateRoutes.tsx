@@ -13,10 +13,14 @@ export default function PrivateRoutes(): {
   const Viewer: React.LazyExoticComponent<React.FC<{}>> = lazy(
     () => import('../pages/viewer/Viewer.tsx')
   );
+  const Library: React.LazyExoticComponent<React.FC<{}>> = lazy(
+    () => import('../pages/library/Library.tsx')
+  );
 
   return [
     { path: '/home', element: <Home /> },
     { path: '/books', element: <Books /> },
-    { path: '/viewer', element: <Viewer /> }
+    { path: '/viewer', element: <Viewer /> },
+    { path: '/library', element: <Library /> }
   ];
 }

@@ -15,9 +15,7 @@ const App: React.FC = (): JSX.Element => {
   const router = createBrowserRouter(routesConfig);
 
   // UseSelector for reading page loading state
-  const pageData = useSelector((state: AppState): ILoading => {
-    return state.loading;
-  });
+  const pageData = useSelector((state: AppState): ILoading => state.loading);
 
   // Callback / dispatch and effect for setting page loading state
   const pageLoading = useCallback((loading: boolean): void => {
@@ -28,9 +26,9 @@ const App: React.FC = (): JSX.Element => {
   }, []);
 
   useEffect((): void => {
-    console.log(pageData, loader);
+    console.log(pageData, 'loader:', loader);
     pageLoading(false);
-  }, [pageLoading]);
+  }, []);
 
   // Provide the router configuration using RouterProvider
   return <RouterProvider router={router} />;

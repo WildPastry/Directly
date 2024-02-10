@@ -1,20 +1,16 @@
 /* eslint-disable no-console */
-import {
-  Dropzone,
-  DropzoneProps,
-  FileRejection,
-  FileWithPath
-} from '@mantine/dropzone';
+import { Dropzone, FileRejection, FileWithPath } from '@mantine/dropzone';
 import { Group, Text, rem } from '@mantine/core';
 import { IconPhoto, IconUpload, IconX } from '@tabler/icons-react';
-import { IFileUploaded } from '../../../models/data.model';
+import { IDropzoneProps } from '../../../models/data.model';
 
-const DropzoneArea: React.FC<IFileUploaded & Partial<DropzoneProps>> = (
-  props: IFileUploaded & Partial<DropzoneProps>
-): JSX.Element => {
+const DropzoneArea: React.FC<IDropzoneProps> = ({
+  onFileUploaded,
+  ...props
+}: IDropzoneProps): JSX.Element => {
   return (
     <Dropzone
-      onDrop={(files: FileWithPath[]) => props.fileUploaded(files)}
+      onDrop={(files: FileWithPath[]) => onFileUploaded(files)}
       onReject={(files: FileRejection[]) =>
         console.log('rejected files', files)
       }

@@ -1,35 +1,48 @@
-import { Button, Group } from '@mantine/core';
-import { IconLiveView, IconPdf } from '@tabler/icons-react';
+/* eslint-disable */
 import DropzoneArea from '../../components/features/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
-import SortableList from '../../components/layout/list/List';
-import { useState } from 'react';
+import { ISortableItem } from '../../models/data.model';
+import { setFiles } from '../../redux/slices/fileSlice';
+import { useAppDispatch } from '../../redux/hooks';
+import { SortableTree } from '../../components/layout/list/List';
 
 const Books: React.FC = (): JSX.Element => {
-  const [files, setFiles] = useState([] as FileWithPath[]);
-  const [display, setDisplay] = useState(false);
+  // Set up dispatch and states
+  const dispatch = useAppDispatch();
+
+  const convertFiles = (files: FileWithPath[]): ISortableItem[] => {
+    return files.map((file) => ({
+      id: self.crypto.randomUUID(),
+      name: file.name || 'Not available',
+      data: {
+        size: file.size || 0,
+        type: file.type || 'Not available',
+        lastModified: file.lastModified || 0
+      },
+      children: [],
+      collapsed: false
+    }));
+  };
 
   // Handle files
   const handleFiles = (files: FileWithPath[]): void => {
-    setFiles(files);
-    setDisplay(true);
+    const currentFiles: ISortableItem[] = convertFiles(files);
+    dispatch(setFiles(currentFiles));
+    console.log(currentFiles);
   };
 
   return (
     <section aria-label='Books Section'>
-      <DropzoneArea fileUploaded={handleFiles} className='mb-3' />
-      <Group gap='md' className='mb-3'>
+      <DropzoneArea onFileUploaded={handleFiles} className='mb-3' />
+      {/* <Group gap='md' className='mb-3'>
         <Button
           leftSection={<IconLiveView size={14} />}
           size='sm'
           variant='outline'>
           Preview
         </Button>
-        <Button leftSection={<IconPdf size={14} />} size='sm' variant='outline'>
-          Combine
-        </Button>
-      </Group>
-      {display ? <SortableList files={files} /> : null}
+      </Group> */}
+      <SortableTree />
     </section>
   );
 };
