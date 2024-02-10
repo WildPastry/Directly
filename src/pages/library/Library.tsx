@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* eslint-disable no-console */
 import { AppState } from '../../redux/store';
 import DropzoneArea from '../../components/features/dropzone/Dropzone';
@@ -7,6 +8,8 @@ import { notifications } from '@mantine/notifications';
 import { setFiles } from '../../redux/slices/fileSlice';
 import { useAppDispatch } from '../../redux/hooks';
 import { useSelector } from 'react-redux';
+import { CardWithStats } from '../../components/card-with-stats/CardWithStats';
+import { Grid } from '@mantine/core';
 
 const Library: React.FC = (): JSX.Element => {
   // Set up dispatch and states
@@ -35,9 +38,22 @@ const Library: React.FC = (): JSX.Element => {
   const handleFiles = (files: FileWithPath[]): void => {
     const currentFiles: ISortableItem[] = convertFiles(files);
     dispatch(setFiles(currentFiles));
-    console.log(currentFiles);
+    console.log(files);
+    Main(files[0])
     showNotification(currentFiles);
   };
+
+  const toBase64 = (file: Blob) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+async function Main(file: Blob) {
+  // const file = document.querySelector('#myfile').files[0];
+  console.log(await toBase64(file));
+}
 
   // Notification
   const showNotification = (items: ISortableItem[]): void => {
@@ -50,11 +66,19 @@ const Library: React.FC = (): JSX.Element => {
   // View PDF
   const viewPdf = (file: ISortableItem): void => {
     console.log(file);
+      // usage
   };
 
   return (
     <section aria-label='Library Section'>
       <DropzoneArea onFileUploaded={handleFiles} className='mb-3' />
+      <Grid>
+      <Grid.Col span={{ base: 12, md: 6, lg: 3 }}>1</Grid.Col>
+      <Grid.Col span={{ base: 12, md: 6, lg: 3 }}>2</Grid.Col>
+      <Grid.Col span={{ base: 12, md: 6, lg: 3 }}>3</Grid.Col>
+      <Grid.Col span={{ base: 12, md: 6, lg: 3 }}>4</Grid.Col>
+    </Grid>
+      {/* <CardWithStats /> */}
       {storedFiles.map((file) => (
         <div key={file.id} onClick={() => viewPdf(file)}>
           {file.name}
