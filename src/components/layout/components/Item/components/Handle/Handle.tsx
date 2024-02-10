@@ -1,5 +1,5 @@
-import React, {forwardRef} from 'react';
-
+/* eslint-disable */
+import {forwardRef} from 'react';
 import {Action, ActionProps} from '../Action';
 
 export const Handle = forwardRef<HTMLButtonElement, ActionProps>(
