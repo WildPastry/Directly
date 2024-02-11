@@ -14,14 +14,14 @@ const CardWithStats: React.FC<CardWithStatsProps> = (
   props: CardWithStatsProps
 ): JSX.Element => {
   const stats = [
-    { title: 'Type', value: props.data.type },
     { title: 'Size', value: props.data.size },
+    { title: 'Type', value: props.data.type },
     { title: 'Last modified', value: props.data.lastModified }
   ];
 
   const items = stats.map((stat) => (
-    <div key={stat.title}>
-      <Text size='xs' c='dimmed'>
+    <div key={stat.title} className={classes.footerItems}>
+      <Text size='sm' c='dimmed' mr='5'>
         {stat.title}
       </Text>
       <Text fw={500} size='sm'>
