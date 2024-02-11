@@ -1,7 +1,7 @@
 import Loading from './Loading';
 import { MantineProvider } from '@mantine/core';
 import { MemoryRouter } from 'react-router-dom';
-import { mockMatchMedia } from '../../../utils/testUtils';
+import { mockMatchMedia } from '../../utils/testUtils';
 import { render } from '@testing-library/react';
 
 const renderWithRouter = (component: any, { route = '/' } = {}) => {

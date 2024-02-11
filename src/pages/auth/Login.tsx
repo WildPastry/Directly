@@ -1,4 +1,4 @@
-import { AuthForm } from '../../components/layout/auth-form/AuthForm';
+import { AuthForm } from '../../components/auth-form/AuthForm';
 import directlyLogo from '../../assets/logo.svg';
 
 const Login: React.FC = (): JSX.Element => {

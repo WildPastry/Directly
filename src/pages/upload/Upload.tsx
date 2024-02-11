@@ -1,4 +1,4 @@
-import DropzoneArea from '../../components/features/dropzone/Dropzone';
+import DropzoneArea from '../../components/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { ISortableItem } from '../../models/data.model';
 import { notifications } from '@mantine/notifications';

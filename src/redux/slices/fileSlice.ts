@@ -42,6 +42,7 @@ export const orderFiles =
       // Map each file
       const setFile: ISortableItem[] = files.map((file) => ({
         id: file.id,
+        arrayBuffer: file.arrayBuffer,
         name: file.name,
         data: {
           size: file.data.size,

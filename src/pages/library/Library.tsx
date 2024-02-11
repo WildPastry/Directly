@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* eslint-disable no-console */
 import { AppState } from '../../redux/store';
-import DropzoneArea from '../../components/features/dropzone/Dropzone';
+import DropzoneArea from '../../components/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { ISortableItem } from '../../models/data.model';
 import { notifications } from '@mantine/notifications';
@@ -11,52 +11,70 @@ import { useSelector } from 'react-redux';
 import { Grid } from '@mantine/core';
 import CardWithStats from '../../components/card-with-stats/CardWithStats';
 import { UniqueIdentifier } from '@dnd-kit/core';
+import { useNavigate } from 'react-router-dom';
 
 const Library: React.FC = (): JSX.Element => {
   // Set up dispatch and states
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const storedFiles: ISortableItem[] = useSelector(
     (state: AppState): ISortableItem[] => state.files
   );
 
   // Convert files
-  const convertFiles = (files: FileWithPath[]): ISortableItem[] => {
-    return files.map((file) => ({
-      id: self.crypto.randomUUID(),
-      name: file.name || 'Not available',
-      data: {
-        size: file.size || 0,
-        type: file.type || 'Not available',
-        lastModified: file.lastModified || 0
-      },
-      children: [],
-      collapsed: false
-    }));
+  const convertFiles = async (
+    files: FileWithPath[]
+  ): Promise<ISortableItem[]> => {
+    const convertedFiles: ISortableItem[] = [];
+
+    for (const file of files) {
+      const arrayBuffer = await readFileAsArrayBuffer(file);
+
+      const sortableItem: ISortableItem = {
+        id: self.crypto.randomUUID(),
+        arrayBuffer: arrayBuffer,
+        name: file.name || 'Not available',
+        data: {
+          size: file.size || 0,
+          type: file.type || 'Not available',
+          lastModified: file.lastModified || 0
+        },
+        children: [],
+        collapsed: false
+      };
+      convertedFiles.push(sortableItem);
+    }
+
+    return convertedFiles;
   };
+
+  const readFileAsArrayBuffer = (file: Blob): Promise<ArrayBuffer> => {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = () => {
+        resolve(reader.result as ArrayBuffer);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
+
+  const readFileAsBlob = (file: ISortableItem): Blob => {
+    return new Blob([file.arrayBuffer], { type: file.data.type });
+  }
 
   // Handle files
   const handleFiles = (files: FileWithPath[]): void => {
-    const currentFiles: ISortableItem[] = convertFiles(files);
-    dispatch(setFiles(currentFiles));
     console.log(files);
-    // convertFile(files[0])
-    showNotification(currentFiles);
-  };
-
-  // Base64 conversion
-  const toBase64 = (file: Blob) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
+    convertFiles(files).then((currentFiles: ISortableItem[]) => {
+      console.log(currentFiles);
+      dispatch(setFiles(currentFiles));
+      showNotification(currentFiles);
     });
-
-  // async function convertFile(file: Blob) {
-  //   // const file = document.querySelector('#myfile').files[0];
-  //   console.log(await toBase64(file));
-  // }
+  };
 
   // Notification
   const showNotification = (items: ISortableItem[]): void => {
@@ -70,17 +88,20 @@ const Library: React.FC = (): JSX.Element => {
   const handleRemove = (id: UniqueIdentifier): void => {
     console.log('handleRemove', id);
     dispatch(removeFile(id));
-  }
+  };
 
   // View file
   const handleView = (file: ISortableItem): void => {
     console.log('handleView', file);
+    navigate('/viewer', { state: { file: readFileAsBlob(file) } });
   };
 
   return (
     <section aria-label='Library Section'>
+      {/* Dropzone */}
       <DropzoneArea onFileUploaded={handleFiles} className='mb-3' />
-      <Grid>
+      {/* Stored files */}
+      <Grid className='mb-3'>
         {storedFiles.map((file: ISortableItem) => (
           <Grid.Col span={{ base: 12, md: 6, lg: 4 }} key={file.id}>
             <CardWithStats

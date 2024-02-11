@@ -14,7 +14,7 @@ import {
   IconSunFilled
 } from '@tabler/icons-react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import Loading from '../../components/features/loading/Loading';
+import Loading from '../../components/loading/Loading';
 import { Suspense } from 'react';
 import directlyLogo from '../../assets/logo.svg';
 import { setAuth } from '../../redux/slices/authSlice';

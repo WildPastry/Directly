@@ -16,11 +16,15 @@ export default function PrivateRoutes(): {
   const Library: React.LazyExoticComponent<React.FC<{}>> = lazy(
     () => import('../pages/library/Library.tsx')
   );
+  const Viewer: React.LazyExoticComponent<React.FC<{}>> = lazy(
+    () => import('../pages/viewer/Viewer.tsx')
+  );
 
   return [
     { path: '/home', element: <Home /> },
     { path: '/upload', element: <Upload /> },
     { path: '/sorting', element: <Sorting /> },
-    { path: '/library', element: <Library /> }
+    { path: '/library', element: <Library /> },
+    { path: '/viewer', element: <Viewer /> }
   ];
 }
