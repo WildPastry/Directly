@@ -11,8 +11,7 @@ import {
   IconHome,
   IconLogout,
   IconMoonFilled,
-  IconSunFilled,
-  IconUpload
+  IconSunFilled
 } from '@tabler/icons-react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import Loading from '../../components/features/loading/Loading';
@@ -108,39 +107,6 @@ const Layout: React.FC = (): JSX.Element => {
               </Button>
             </NavLink>
           </div>
-          {/* <div className='w-full'>
-            <NavLink to={`/upload`}>
-              <Button
-                fullWidth
-                leftSection={<IconUpload size={14} />}
-                size='sm'
-                variant='outline'>
-                Upload
-              </Button>
-            </NavLink>
-          </div> */}
-          {/* <div className='w-full'>
-            <NavLink to={`/books`}>
-              <Button
-                fullWidth
-                leftSection={<IconBook size={14} />}
-                size='sm'
-                variant='outline'>
-                Books
-              </Button>
-            </NavLink>
-          </div> */}
-          {/* <div className='w-full'>
-            <NavLink to={`/viewer`}>
-              <Button
-                fullWidth
-                leftSection={<IconEye size={14} />}
-                size='sm'
-                variant='outline'>
-                Viewer
-              </Button>
-            </NavLink>
-          </div> */}
           <div className='w-full'>
             <NavLink to={`/library`}>
               <Button

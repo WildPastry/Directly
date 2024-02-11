@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { setError, setLoading } from './loadingSlice';
 import { AppThunk } from '../store';
 import { ISortableItem } from '../../models/data.model';
 import { UniqueIdentifier } from '@dnd-kit/core';
+import { setError } from './loadingSlice';
 
 // Set initialState
 const initialState: ISortableItem[] = [];
@@ -21,36 +21,19 @@ const fileSlice = createSlice({
     },
     orderFiles(state, action: PayloadAction<ISortableItem[]>) {
       action.payload.forEach((file: ISortableItem) => state.push(file));
+    },
+    removeFile(state, action: PayloadAction<UniqueIdentifier>) {
+      return state.filter((file) => file.id !== action.payload);
     }
   }
 });
 
-// Export set file actions from fileSlice
-export const setFiles =
-  (files: ISortableItem[]): AppThunk =>
-  (dispatch) => {
-    try {
-      // Map each file
-      const setFile: ISortableItem[] = files.map((file) => ({
-        id: file.id,
-        name: file.name,
-        data: {
-          size: file.data.size,
-          type: file.data.type,
-          lastModified: file.data.lastModified
-        },
-        children: file.children,
-        collapsed: file.collapsed
-      }));
-      // Dispatch files once finished mapping
-      dispatch(fileSlice.actions.setFiles(setFile));
-      dispatch(setLoading(false));
-    } catch (err) {
-      // Create error page if failed
-      dispatch(setError(true));
-    }
-  };
-
+/**
+ * The `orderFiles` function takes an array of files, maps each file to a new object with selected
+ * properties, and dispatches the ordered files to the state.
+ * @param {ISortableItem[]} files - An array of objects of type ISortableItem.
+ * @returns {void} - Dispatch new ordered files
+ */
 export const orderFiles =
   (files: ISortableItem[]): AppThunk =>
   (dispatch) => {
@@ -70,18 +53,14 @@ export const orderFiles =
       }));
       // Dispatch files once finished mapping
       dispatch(fileSlice.actions.orderFiles(setFile));
-      dispatch(setLoading(false));
     } catch (err) {
       // Create error page if failed
       dispatch(setError(true));
     }
   };
 
-export const removeFile =
-  (id: UniqueIdentifier): AppThunk =>
-  (dispatch) => {
-    console.log('removeFile', id);
-  };
+// Export actions
+export const { setFiles, removeFile, resetFiles } = fileSlice.actions;
 
 // Export reducer
 export default fileSlice.reducer;
