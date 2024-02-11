@@ -2,6 +2,22 @@
   background-color: var(--mantine-color-body);
 }
 
+.iconWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-lg);
+}
+
+.innerIconWrapper {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+.icon {
+  cursor: pointer;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;

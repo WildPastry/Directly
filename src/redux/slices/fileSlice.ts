@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { setError, setLoading } from './loadingSlice';
 import { AppThunk } from '../store';
 import { ISortableItem } from '../../models/data.model';
+import { UniqueIdentifier } from '@dnd-kit/core';
 
 // Set initialState
 const initialState: ISortableItem[] = [];
@@ -74,6 +75,12 @@ export const orderFiles =
       // Create error page if failed
       dispatch(setError(true));
     }
+  };
+
+export const removeFile =
+  (id: UniqueIdentifier): AppThunk =>
+  (dispatch) => {
+    console.log('removeFile', id);
   };
 
 // Export reducer
