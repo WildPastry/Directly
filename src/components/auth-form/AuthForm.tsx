@@ -18,6 +18,8 @@ import { setAuth } from '../../redux/slices/authSlice';
 import { useAppDispatch } from '../../redux/hooks';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
+import { ZitadelConfig, createZitadelAuth } from '@zitadel/react';
+import { useState, useEffect } from 'react';
 
 export const AuthForm: React.FC<PaperProps> = (
   props: PaperProps
@@ -43,6 +45,41 @@ export const AuthForm: React.FC<PaperProps> = (
     }
   });
 
+  const config: ZitadelConfig = {
+    authority: 'https://am-instance-jlhhge.zitadel.cloud',
+    // eslint-disable-next-line camelcase
+    client_id: '249798313707112549@directly'
+  };
+
+  const zitadel = createZitadelAuth(config);
+
+  function login() {
+    console.log('login');
+    zitadel.authorize();
+    if (authenticated) {
+      dispatch(setAuth(true));
+      navigate('/home');
+    }
+  }
+
+  function signout() {
+    zitadel.signout();
+  }
+
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    // console.log(zitadel, config)
+    zitadel.userManager.getUser().then((user) => {
+      console.log(user);
+      if (user) {
+        setAuthenticated(true);
+      } else {
+        setAuthenticated(false);
+      }
+    });
+  }, [zitadel]);
+
   return (
     <Paper radius='md' p='xl' withBorder {...props} className='w-96'>
       <Text size='lg' fw={500}>
@@ -58,6 +95,7 @@ export const AuthForm: React.FC<PaperProps> = (
       <form
         onSubmit={form.onSubmit(() => {
           console.log('Sign in...');
+          // login();
           dispatch(setAuth(true));
           navigate('/home');
         })}>
