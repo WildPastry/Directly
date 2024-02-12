@@ -11,7 +11,7 @@ export type ISortableItems = ISortableItem[];
 
 export interface ISortableItem {
   id: UniqueIdentifier;
-  arrayBuffer: ArrayBuffer;
+  arrayBuffer?: ArrayBuffer;
   name: string;
   data: {
     size: number;

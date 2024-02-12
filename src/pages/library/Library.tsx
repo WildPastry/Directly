@@ -62,8 +62,10 @@ const Library: React.FC = (): JSX.Element => {
     });
   }
 
-  const readFileAsBlob = (file: ISortableItem): Blob => {
-    return new Blob([file.arrayBuffer], { type: file.data.type });
+  const readFileAsBlob = (file: ISortableItem): Blob | undefined => {
+    if (file.arrayBuffer) {
+      return new Blob([file.arrayBuffer], { type: file.data.type });
+    }
   }
 
   // Handle files
