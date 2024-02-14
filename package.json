@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "clean": "npx prettier --write \"**/*.{js,jsx,ts,tsx}\" && npm run lint:fix",
-    "dev": "vite",
+    "start": "vite",
     "format:fix": "npx prettier --write \"**/*.{js,jsx,ts,tsx}\"",
     "format": "npx prettier --check \"**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"**/*.{js,jsx,ts,tsx}\"",
@@ -26,7 +26,6 @@
     "@reduxjs/toolkit": "^2.2.0",
     "@tabler/icons-react": "^2.47.0",
     "base-64": "^1.0.0",
-    "pspdfkit": "^2024.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
