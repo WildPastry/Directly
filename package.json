@@ -25,7 +25,6 @@
     "@pdftron/webviewer": "^10.7.1",
     "@reduxjs/toolkit": "^2.1.0",
     "@tabler/icons-react": "^2.47.0",
-    "@zitadel/react": "^1.0.2",
     "base-64": "^1.0.0",
     "pspdfkit": "^2024.1.2",
     "react": "^18.2.0",
