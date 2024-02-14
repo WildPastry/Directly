@@ -14,8 +14,8 @@ import {
 } from '@mantine/core';
 import { upperFirst, useToggle } from '@mantine/hooks';
 import { GoogleButton } from './GoogleButton';
-import { setAuth } from '../../../redux/slices/authSlice';
-import { useAppDispatch } from '../../../redux/hooks';
+import { setAuth } from '../../redux/slices/authSlice';
+import { useAppDispatch } from '../../redux/hooks';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
 
@@ -112,9 +112,6 @@ export const AuthForm: React.FC<PaperProps> = (
 
           {type === 'register' && (
             <Checkbox
-              classNames={{
-                inner: 'ml-3'
-              }}
               label='I accept terms and conditions'
               checked={form.values.terms}
               onChange={(event) =>

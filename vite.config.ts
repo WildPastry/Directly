@@ -14,19 +14,19 @@ export default defineConfig({
       filename: 'analytics.html'
     }) as PluginOption
   ],
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id: string) {
-          if (id.includes('node_modules'))
-            return id
-              .toString()
-              .split('node_modules/')[1]
-              .split('/')[0]
-              .toString();
-          return 'vender';
-        }
-      }
-    }
-  }
+  // build: {
+  //   rollupOptions: {
+  //     output: {
+  //       manualChunks(id: string) {
+  //         if (id.includes('node_modules'))
+  //           return id
+  //             .toString()
+  //             .split('node_modules/')[1]
+  //             .split('/')[0]
+  //             .toString();
+  //         return 'vender';
+  //       }
+  //     }
+  //   }
+  // }
 });

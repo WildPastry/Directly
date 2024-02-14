@@ -1,13 +1,17 @@
 /* eslint-disable no-console */
 import { useEffect, useRef } from 'react';
 import WebViewer from '@pdftron/webviewer';
+import { useLocation } from 'react-router-dom';
 
 const Viewer: React.FC = (): JSX.Element => {
   const licenseKey: string = import.meta.env.ASPYRE_KEY;
   const webViewerRef: React.RefObject<HTMLDivElement> =
     useRef<HTMLDivElement>(null);
 
+  const { state } = useLocation();
+
   useEffect(() => {
+    console.log(state);
     WebViewer(
       {
         path: 'lib',
@@ -17,7 +21,11 @@ const Viewer: React.FC = (): JSX.Element => {
       },
       webViewerRef.current as HTMLDivElement
     ).then((instance) => {
-      console.log(instance.UI.contextMenuPopup);
+      instance.UI.loadDocument(state.file, { filename: state.file.name });
+      const { documentViewer } = instance.Core;
+      documentViewer.addEventListener('documentLoaded', () => {
+        console.log('documentLoaded');
+      });
     });
   }, []);
 

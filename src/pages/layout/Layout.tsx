@@ -6,17 +6,16 @@ import {
   useMantineColorScheme
 } from '@mantine/core';
 import {
-  IconBook,
+  IconArrowsSort,
   IconBooks,
-  IconEye,
   IconHome,
   IconLogout,
   IconMoonFilled,
   IconSunFilled
 } from '@tabler/icons-react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import Loading from '../../components/features/loading/Loading';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
+import Loading from '../../components/loading/Loading';
 import directlyLogo from '../../assets/logo.svg';
 import { setAuth } from '../../redux/slices/authSlice';
 import { useAppDispatch } from '../../redux/hooks';
@@ -25,12 +24,32 @@ import { useDisclosure } from '@mantine/hooks';
 const Layout: React.FC = (): JSX.Element => {
   // Colour scheme
   const { setColorScheme } = useMantineColorScheme();
+  const [showDark, setShowDark] = useState(true);
   // Side nav
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
   // Set up dispatch
   const dispatch = useAppDispatch();
+
+  const showDarkOrLightIcon = (): JSX.Element => {
+    if (showDark) {
+      return (
+        <IconMoonFilled
+          className='cursor-pointer'
+          onClick={() => [setColorScheme('light'), setShowDark(false)]}
+          size={30}
+        />
+      );
+    }
+    return (
+      <IconSunFilled
+        className='cursor-pointer'
+        onClick={() => [setColorScheme('dark'), setShowDark(true)]}
+        size={30}
+      />
+    );
+  };
 
   // Logout
   const logout = (): void => {
@@ -71,29 +90,7 @@ const Layout: React.FC = (): JSX.Element => {
             </div>
           </Link>
         </Group>
-        <Group gap='md'>
-          <Button
-            leftSection={<IconSunFilled size={14} />}
-            onClick={() => setColorScheme('light')}
-            size='sm'
-            variant='filled'>
-            Light
-          </Button>
-          <Button
-            leftSection={<IconMoonFilled size={14} />}
-            onClick={() => setColorScheme('dark')}
-            size='sm'
-            variant='filled'>
-            Dark
-          </Button>
-          <Button
-            color='var(--mantine-color-indigo-9)'
-            onClick={() => setColorScheme('auto')}
-            size='sm'
-            variant='filled'>
-            Auto
-          </Button>
-        </Group>
+        <Group gap='md'>{showDarkOrLightIcon()}</Group>
       </AppShell.Header>
       <AppShell.Navbar className='p-4'>
         <div className='flex flex-col h-full gap-6'>
@@ -109,28 +106,6 @@ const Layout: React.FC = (): JSX.Element => {
             </NavLink>
           </div>
           <div className='w-full'>
-            <NavLink to={`/books`}>
-              <Button
-                fullWidth
-                leftSection={<IconBook size={14} />}
-                size='sm'
-                variant='outline'>
-                Books
-              </Button>
-            </NavLink>
-          </div>
-          {/* <div className='w-full'>
-            <NavLink to={`/viewer`}>
-              <Button
-                fullWidth
-                leftSection={<IconEye size={14} />}
-                size='sm'
-                variant='outline'>
-                Viewer
-              </Button>
-            </NavLink>
-          </div> */}
-          <div className='w-full'>
             <NavLink to={`/library`}>
               <Button
                 fullWidth
@@ -138,6 +113,17 @@ const Layout: React.FC = (): JSX.Element => {
                 size='sm'
                 variant='outline'>
                 Library
+              </Button>
+            </NavLink>
+          </div>
+          <div className='w-full'>
+            <NavLink to={`/sorting`}>
+              <Button
+                fullWidth
+                leftSection={<IconArrowsSort size={14} />}
+                size='sm'
+                variant='outline'>
+                Sorting
               </Button>
             </NavLink>
           </div>
