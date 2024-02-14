@@ -2,7 +2,7 @@
 import { Dropzone, FileRejection, FileWithPath } from '@mantine/dropzone';
 import { Group, Text, rem } from '@mantine/core';
 import { IconPhoto, IconUpload, IconX } from '@tabler/icons-react';
-import { IDropzoneProps } from '../../../models/data.model';
+import { IDropzoneProps } from '../../models/data.model';
 
 const DropzoneArea: React.FC<IDropzoneProps> = ({
   onFileUploaded,

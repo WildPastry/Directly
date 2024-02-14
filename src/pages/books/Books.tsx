@@ -1,5 +1,5 @@
 /* eslint-disable */
-import DropzoneArea from '../../components/features/dropzone/Dropzone';
+import DropzoneArea from '../../components/dropzone/Dropzone';
 import { FileWithPath } from '@mantine/dropzone';
 import { ISortableItem } from '../../models/data.model';
 import { setFiles } from '../../redux/slices/fileSlice';

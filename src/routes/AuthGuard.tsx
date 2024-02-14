@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { AppState } from '../redux/store.ts';
 import { IAuth } from '../models/auth.model.ts';
 import Layout from '../pages/layout/Layout.tsx';
-import Loading from '../components/features/loading/Loading.tsx';
+import Loading from '../components/loading/Loading.tsx';
 import { useSelector } from 'react-redux';
 
 const AuthGuard: () => JSX.Element = () => {
