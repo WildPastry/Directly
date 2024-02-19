@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useCallback, useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { AppState } from './redux/store';
@@ -26,7 +25,6 @@ const App: React.FC = (): JSX.Element => {
   }, []);
 
   useEffect((): void => {
-    console.log(pageData, 'loader:', loader);
     pageLoading(false);
   }, []);
 
