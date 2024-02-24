@@ -4,7 +4,7 @@ import WebViewer from '@pdftron/webviewer';
 import { useLocation } from 'react-router-dom';
 
 const Viewer: React.FC = (): JSX.Element => {
-  const licenseKey: string = import.meta.env.ASPYRE_KEY;
+  const licenseKey: string = import.meta.env.VITE_ASPYRE_KEY;
   const webViewerRef: React.RefObject<HTMLDivElement> =
     useRef<HTMLDivElement>(null);
 
