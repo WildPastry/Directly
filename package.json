@@ -21,7 +21,7 @@
     "@mantine/dropzone": "^7.5.3",
     "@mantine/form": "^7.5.3",
     "@mantine/hooks": "^7.5.3",
-    "@mantine/notifications": "^7.5.3",
+    "@mantine/notifications": "^7.11.1",
     "@pdftron/webviewer": "^10.7.2",
     "@reduxjs/toolkit": "^2.2.1",
     "@tabler/icons-react": "^2.47.0",
